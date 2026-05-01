@@ -6,6 +6,32 @@
 <meta name="theme-color" content="#FAFCFF" />
 <title>Salon Indigo — Hair, in a different light</title>
 <meta name="description" content="Salon Indigo. Architectural cuts, tonal colour, sun-drawn highlights. By the pier." />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Salon Indigo — Hair, in a different light" />
+<meta property="og:description" content="Architectural cuts, tonal colour, sun-drawn highlights. Pier studio open Tue–Sun." />
+<meta property="og:image" content="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1200&q=80" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  "name": "Salon Indigo",
+  "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1200&q=80",
+  "telephone": "+1-555-247-0182",
+  "address": { "@type": "PostalAddress", "streetAddress": "88 Marine Parade, Pier Building, Studio 4" },
+  "openingHoursSpecification": [
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday"],"opens":"10:00","closes":"20:30"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"19:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"11:00","closes":"17:00"}
+  ],
+  "priceRange": "$$",
+  "aggregateRating": { "@type":"AggregateRating","ratingValue":"4.9","reviewCount":"847" }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -810,13 +836,258 @@
     box-shadow: var(--shadow-3);
   }
   .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  /* —— Skip-to-content (a11y) —— */
+  .skip {
+    position: absolute; left: 12px; top: -100px;
+    background: var(--ink); color: var(--bg);
+    padding: 10px 16px; border-radius: var(--radius);
+    z-index: 200; font-size: 13px; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: top .2s ease;
+  }
+  .skip:focus { top: 12px; outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  /* —— Focus rings —— */
+  :focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+  }
+  .btn:focus-visible, .slot:focus-visible, .seg button:focus-visible {
+    outline-offset: 3px;
+  }
+
+  /* —— Dismissible bar —— */
+  .bar.hidden { display: none; }
+  .bar-close {
+    background: transparent; border: 0; color: inherit;
+    opacity: 0.6; padding: 4px 8px; margin-left: 8px;
+    font-size: 16px; line-height: 1;
+  }
+  .bar-close:hover { opacity: 1; }
+
+  /* —— Modal shell —— */
+  .modal {
+    position: fixed; inset: 0; z-index: 100;
+    background: color-mix(in oklab, var(--ink) 60%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none; align-items: center; justify-content: center;
+    padding: env(safe-area-inset-top) 16px calc(20px + env(safe-area-inset-bottom));
+    overflow-y: auto;
+  }
+  .modal.open { display: flex; animation: fadein .2s ease; }
+  @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+  .modal-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 540px;
+    max-height: calc(100vh - 40px - env(safe-area-inset-bottom));
+    box-shadow: var(--shadow-3);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    overflow: hidden;
+    animation: modalin .25s cubic-bezier(.2,.7,.3,1);
+  }
+  @keyframes modalin { from { opacity: 0; transform: translateY(16px) scale(.98); } to { opacity: 1; transform: none; } }
+  .modal-head {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; gap: 12px;
+    background: var(--bg);
+  }
+  .modal-head h2 {
+    font-family: var(--serif); font-weight: 500;
+    font-size: 22px; margin: 0; flex: 1;
+  }
+  .modal-head .step-pill {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--blue); background: var(--blue-soft);
+    padding: 4px 10px; border-radius: 999px;
+  }
+  .modal-close {
+    background: var(--bg); border: 1px solid var(--line);
+    width: 36px; height: 36px; border-radius: 50%;
+    color: var(--ink); font-size: 20px; line-height: 1;
+    display: grid; place-items: center;
+  }
+  .modal-close:hover { background: var(--ink); color: var(--bg); }
+  .modal-body { padding: 20px; overflow-y: auto; }
+  .modal-foot {
+    padding: 14px 20px;
+    border-top: 1px solid var(--line);
+    display: flex; gap: 10px; justify-content: space-between;
+    background: var(--bg);
+  }
+  @media (max-width: 540px) {
+    .modal-card { max-width: 100%; max-height: calc(100vh - 20px - env(safe-area-inset-bottom)); }
+  }
+
+  /* —— Stepper progress —— */
+  .stepper {
+    display: flex; gap: 6px; align-items: center;
+    padding: 0 20px 12px;
+    background: var(--bg);
+  }
+  .stepper .step {
+    flex: 1; height: 4px; border-radius: 999px;
+    background: var(--line);
+    transition: background var(--t-fast);
+  }
+  .stepper .step.done { background: var(--blue-2); }
+  .stepper .step.active { background: linear-gradient(90deg, var(--blue) 0%, var(--blue) 50%, var(--line) 50%); }
+
+  /* —— Booking modal grids —— */
+  .opt-grid {
+    display: grid; gap: 10px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .opt {
+    text-align: left;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px;
+    cursor: pointer;
+    transition: border-color var(--t-fast), background var(--t-fast), transform var(--t-fast);
+    display: grid; gap: 4px;
+    box-shadow: var(--shadow-1);
+  }
+  .opt:hover { border-color: var(--blue); transform: translateY(-1px); }
+  .opt[aria-pressed="true"] {
+    border-color: var(--blue);
+    background: linear-gradient(180deg, var(--surface), var(--blue-soft));
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--blue) 20%, transparent), var(--shadow-2);
+  }
+  .opt b { font-family: var(--serif); font-weight: 500; font-size: 16px; }
+  .opt small { color: var(--muted); font-size: 12px; }
+  .opt-price { color: var(--blue-2); font-size: 13px; font-weight: 500; }
+
+  .opt-stylist { grid-template-columns: auto 1fr; align-items: center; gap: 14px; padding: 12px 14px; }
+  .opt-stylist .av {
+    width: 44px; height: 44px; border-radius: 50%;
+    background-size: cover; background-position: center;
+    box-shadow: var(--shadow-1);
+  }
+  @media (max-width: 480px) {
+    .opt-grid { grid-template-columns: 1fr; }
+  }
+  .field-input {
+    background: var(--surface);
+    border: 1px solid var(--line); color: var(--ink);
+    padding: 12px 14px; border-radius: var(--radius);
+    font-size: 15px; font-family: inherit; width: 100%;
+    box-shadow: var(--shadow-1);
+  }
+  .field-input:focus { outline: 2px solid var(--blue); outline-offset: 2px; border-color: var(--blue); }
+  .review-line {
+    display: grid; grid-template-columns: 110px 1fr; gap: 8px;
+    padding: 10px 0; border-bottom: 1px dashed var(--line);
+    font-size: 14px;
+  }
+  .review-line:last-of-type { border-bottom: 0; }
+  .review-line dt { color: var(--muted); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; padding-top: 2px; }
+  .review-line dd { margin: 0; color: var(--ink); }
+  .booked-banner {
+    background: linear-gradient(135deg, var(--blue), var(--indigo));
+    color: #fff; padding: 24px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    margin: 4px 0 12px;
+  }
+  .booked-banner .check {
+    width: 48px; height: 48px; margin: 0 auto 12px;
+    background: rgba(255,255,255,0.2); border-radius: 50%;
+    display: grid; place-items: center;
+  }
+  .booked-banner h3 {
+    font-family: var(--serif); font-weight: 500;
+    font-size: 22px; margin: 0 0 6px;
+  }
+  .booked-banner p { margin: 0; opacity: 0.85; font-size: 14px; }
+
+  /* —— Lightbox —— */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 110;
+    background: rgba(5,9,18,0.95);
+    display: none; align-items: center; justify-content: center;
+    padding: 16px;
+  }
+  .lightbox.open { display: flex; animation: fadein .2s ease; }
+  .lightbox img {
+    max-width: 100%; max-height: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 32px 80px -20px rgba(0,0,0,0.7);
+  }
+  .lb-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: #fff;
+    width: 48px; height: 48px; border-radius: 50%;
+    display: grid; place-items: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .lb-btn:hover { background: rgba(255,255,255,0.2); }
+  .lb-btn.prev { left: 16px; }
+  .lb-btn.next { right: 16px; }
+  .lb-close {
+    position: absolute; top: calc(16px + env(safe-area-inset-top)); right: 16px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: #fff;
+    width: 40px; height: 40px; border-radius: 50%;
+    font-size: 22px; line-height: 1;
+    backdrop-filter: blur(10px);
+  }
+  .lb-counter {
+    position: absolute; bottom: calc(16px + env(safe-area-inset-bottom));
+    left: 50%; transform: translateX(-50%);
+    color: #fff; font-size: 12px; letter-spacing: 0.16em;
+    background: rgba(255,255,255,0.08);
+    padding: 6px 12px; border-radius: 999px;
+    backdrop-filter: blur(10px);
+  }
+
+  /* —— Stylist profile modal extras —— */
+  .stylist-hero {
+    aspect-ratio: 16/9;
+    background-size: cover; background-position: center;
+    border-radius: var(--radius);
+    margin: -20px -20px 16px;
+    border-radius: 0;
+  }
+  .stylist-meta { display: grid; gap: 12px; }
+  .stylist-meta .row {
+    display: grid; grid-template-columns: 90px 1fr; gap: 10px;
+    font-size: 14px; align-items: start;
+  }
+  .stylist-meta dt {
+    color: var(--muted); font-size: 11px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    padding-top: 2px;
+  }
+  .stylist-slots { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stylist-slots .slot { padding: 8px 12px; font-size: 13px; }
+
+  /* —— Map illustration —— */
+  .map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 </style>
 </head>
 <body>
 
-<div class="bar">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="bar" id="annBar">
   <span>Now booking spring · 15% off first colour for new guests</span>
-  <a href="#book" class="hide-sm">Reserve a chair →</a>
+  <span style="display:flex;align-items:center;gap:0">
+    <a href="#book" class="hide-sm">Reserve a chair →</a>
+    <button class="bar-close" id="annClose" aria-label="Dismiss announcement">×</button>
+  </span>
 </div>
 
 <header class="nav">
@@ -838,12 +1109,12 @@
       <button class="btn ghost icon" id="themeToggle" aria-label="Toggle theme" title="Toggle light/dark">
         <svg id="themeIcon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
       </button>
-      <a href="#book" class="btn small">Book</a>
+      <a href="#book" class="btn small js-book-open">Book</a>
     </div>
   </div>
 </header>
 
-<main>
+<main id="main">
 
   <section class="hero" aria-labelledby="hero-title">
     <div class="reveal">
@@ -855,7 +1126,7 @@
         <span><b>4.9</b> · 847 reviews</span>
       </div>
       <div class="h-cta">
-        <a href="#book" class="btn">Book a chair</a>
+        <a href="#book" class="btn js-book-open">Book a chair</a>
         <a href="#estimator" class="btn ghost">Get a quote</a>
       </div>
     </div>
@@ -945,7 +1216,7 @@
             <div class="label">Estimated</div>
             <div class="price"><span id="estLow">$84</span><small> – <span id="estHigh">$120</span></small></div>
           </div>
-          <a href="#book" class="btn small">Book this</a>
+          <a href="#book" class="btn small js-book-open" id="estBookBtn">Book this</a>
         </div>
       </form>
     </div>
@@ -956,26 +1227,26 @@
       <h2 id="team-title" class="section-title">The <em>team</em></h2>
       <p class="section-lede">Four senior stylists, one master colourist, one apprentice. Tell us at booking and we'll match the right chair.</p>
     </div>
-    <div class="team-grid">
-      <article class="stylist tilt">
+    <div class="team-grid" id="teamGrid">
+      <article class="stylist tilt" tabindex="0" role="button" data-stylist="ava" aria-label="View Ava L. profile">
         <div class="stylist-photo" style="background-image:url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=600&q=80');"></div>
         <span class="role">Master stylist</span>
         <h3>Ava L.</h3>
         <p>Curls, layered cuts, postpartum hair.</p>
       </article>
-      <article class="stylist tilt">
+      <article class="stylist tilt" tabindex="0" role="button" data-stylist="nico" aria-label="View Nico V. profile">
         <div class="stylist-photo" style="background-image:url('https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=600&q=80');"></div>
         <span class="role">Master colourist</span>
         <h3>Nico V.</h3>
         <p>Sun-drawn blondes, copper formulations, correction work.</p>
       </article>
-      <article class="stylist tilt">
+      <article class="stylist tilt" tabindex="0" role="button" data-stylist="lena" aria-label="View Lena H. profile">
         <div class="stylist-photo" style="background-image:url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80');"></div>
         <span class="role">Stylist</span>
         <h3>Lena H.</h3>
         <p>Short hair, fringes, men's scissor cuts.</p>
       </article>
-      <article class="stylist tilt">
+      <article class="stylist tilt" tabindex="0" role="button" data-stylist="kai" aria-label="View Kai M. profile">
         <div class="stylist-photo" style="background-image:url('https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?auto=format&fit=crop&w=600&q=80');"></div>
         <span class="role">Stylist</span>
         <h3>Kai M.</h3>
@@ -990,13 +1261,13 @@
       <p class="section-lede">Real clients, real lighting. Tap any image to see the story behind it on Instagram.</p>
     </div>
     <div class="gallery">
-      <a class="g-item tall" href="#" style="background-image:url('https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=800&q=80');" aria-label="Sun-drawn balayage"></a>
-      <a class="g-item" href="#" style="background-image:url('https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=600&q=80');" aria-label="Curtain bangs"></a>
-      <a class="g-item" href="#" style="background-image:url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80');" aria-label="Long layers"></a>
-      <a class="g-item" href="#" style="background-image:url('https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=600&q=80');" aria-label="Smooth blowout"></a>
-      <a class="g-item" href="#" style="background-image:url('https://images.unsplash.com/photo-1605980776566-0486c3ac7617?auto=format&fit=crop&w=600&q=80');" aria-label="Cool tone refresh"></a>
-      <a class="g-item" href="#" style="background-image:url('https://images.unsplash.com/photo-1493106819501-66d381c466f1?auto=format&fit=crop&w=600&q=80');" aria-label="Textured bob"></a>
-      <a class="g-item" href="#" style="background-image:url('https://images.unsplash.com/photo-1612538498488-cc4498f15a07?auto=format&fit=crop&w=600&q=80');" aria-label="Bridal styling"></a>
+      <a class="g-item tall" href="#" data-src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=1600&q=85" style="background-image:url('https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=800&q=80');" aria-label="Sun-drawn balayage"></a>
+      <a class="g-item" href="#" data-src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=1400&q=85" style="background-image:url('https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=600&q=80');" aria-label="Curtain bangs"></a>
+      <a class="g-item" href="#" data-src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=85" style="background-image:url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80');" aria-label="Long layers"></a>
+      <a class="g-item" href="#" data-src="https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=1400&q=85" style="background-image:url('https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=600&q=80');" aria-label="Smooth blowout"></a>
+      <a class="g-item" href="#" data-src="https://images.unsplash.com/photo-1605980776566-0486c3ac7617?auto=format&fit=crop&w=1400&q=85" style="background-image:url('https://images.unsplash.com/photo-1605980776566-0486c3ac7617?auto=format&fit=crop&w=600&q=80');" aria-label="Cool tone refresh"></a>
+      <a class="g-item" href="#" data-src="https://images.unsplash.com/photo-1493106819501-66d381c466f1?auto=format&fit=crop&w=1400&q=85" style="background-image:url('https://images.unsplash.com/photo-1493106819501-66d381c466f1?auto=format&fit=crop&w=600&q=80');" aria-label="Textured bob"></a>
+      <a class="g-item" href="#" data-src="https://images.unsplash.com/photo-1612538498488-cc4498f15a07?auto=format&fit=crop&w=1400&q=85" style="background-image:url('https://images.unsplash.com/photo-1612538498488-cc4498f15a07?auto=format&fit=crop&w=600&q=80');" aria-label="Bridal styling"></a>
     </div>
   </section>
 
@@ -1075,8 +1346,47 @@
     </div>
     <div class="visit-grid">
       <div class="map" aria-hidden="true">
+        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="seaGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#C6D8F5" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#1E58C8" stop-opacity="0.3"/>
+            </linearGradient>
+            <pattern id="wave" x="0" y="0" width="40" height="8" patternUnits="userSpaceOnUse">
+              <path d="M0 4 Q10 0 20 4 T40 4" fill="none" stroke="rgba(30,88,200,0.18)" stroke-width="0.6"/>
+            </pattern>
+          </defs>
+          <!-- Sea -->
+          <path d="M0 110 Q 80 100 160 115 T 320 110 L 400 120 L 400 300 L 0 300 Z" fill="url(#seaGrad)"/>
+          <rect x="0" y="120" width="400" height="180" fill="url(#wave)" opacity="0.7"/>
+          <!-- Coast line -->
+          <path d="M0 110 Q 80 100 160 115 T 320 110 L 400 120" fill="none" stroke="#1E58C8" stroke-width="1.2" stroke-opacity="0.4"/>
+          <!-- Streets -->
+          <line x1="0" y1="60" x2="400" y2="60" stroke="rgba(10,20,40,0.18)" stroke-width="2"/>
+          <line x1="0" y1="30" x2="400" y2="30" stroke="rgba(10,20,40,0.10)" stroke-width="1.5"/>
+          <line x1="120" y1="0" x2="100" y2="105" stroke="rgba(10,20,40,0.14)" stroke-width="1.5"/>
+          <line x1="280" y1="0" x2="285" y2="108" stroke="rgba(10,20,40,0.14)" stroke-width="1.5"/>
+          <!-- Buildings -->
+          <rect x="40" y="40" width="36" height="22" fill="rgba(10,20,40,0.06)" stroke="rgba(10,20,40,0.18)"/>
+          <rect x="140" y="38" width="22" height="24" fill="rgba(10,20,40,0.06)" stroke="rgba(10,20,40,0.18)"/>
+          <rect x="170" y="38" width="40" height="24" fill="rgba(10,20,40,0.06)" stroke="rgba(10,20,40,0.18)"/>
+          <rect x="320" y="40" width="30" height="22" fill="rgba(10,20,40,0.06)" stroke="rgba(10,20,40,0.18)"/>
+          <!-- Pier (horizontal jetty into water) -->
+          <line x1="200" y1="115" x2="200" y2="190" stroke="#1E58C8" stroke-width="3" stroke-linecap="round"/>
+          <line x1="186" y1="125" x2="214" y2="125" stroke="#1E58C8" stroke-width="1.4"/>
+          <line x1="184" y1="145" x2="216" y2="145" stroke="#1E58C8" stroke-width="1.4"/>
+          <line x1="182" y1="165" x2="218" y2="165" stroke="#1E58C8" stroke-width="1.4"/>
+          <!-- Pier building (where the salon is) -->
+          <rect x="194" y="180" width="14" height="14" fill="#fff" stroke="#1E58C8" stroke-width="1.4"/>
+          <!-- Compass -->
+          <g transform="translate(360 250)" opacity="0.55">
+            <circle r="14" fill="none" stroke="#1E58C8" stroke-width="0.8"/>
+            <path d="M0 -10 L3 0 L0 10 L-3 0 Z" fill="#1E58C8"/>
+            <text y="-16" text-anchor="middle" font-size="8" fill="#1E58C8" font-family="Inter, sans-serif">N</text>
+          </g>
+        </svg>
         <span class="label">Salon Indigo</span>
-        <span class="pin"></span>
+        <span class="pin" style="top: calc(50% + 36px);"></span>
       </div>
       <div class="info-card">
         <h3>Plan your visit</h3>
@@ -1091,7 +1401,7 @@
           </div>
         </dd></dl>
         <div class="actions">
-          <a href="#book" class="btn">Book online</a>
+          <a href="#book" class="btn js-book-open">Book online</a>
           <a href="https://maps.google.com/?q=88+Marine+Parade" class="btn ghost">Get directions</a>
         </div>
       </div>
@@ -1143,7 +1453,7 @@
 <nav class="mob-bar" aria-label="Quick">
   <a href="tel:+15552470182">Call</a>
   <a href="#visit">Directions</a>
-  <a href="#book">Book →</a>
+  <a href="#book" class="js-book-open">Book →</a>
 </nav>
 
 <button class="chat-fab" id="chatFab" aria-label="Open chat" aria-expanded="false" aria-controls="chatPanel">
@@ -1174,6 +1484,159 @@
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ——— Booking modal ——— -->
+<div class="modal" id="bookModal" role="dialog" aria-modal="true" aria-labelledby="bookModalTitle" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <span class="step-pill" id="bookStep">Step 1 of 5</span>
+      <h2 id="bookModalTitle">Choose a service</h2>
+      <button class="modal-close" id="bookClose" aria-label="Close booking">×</button>
+    </div>
+    <div class="stepper" aria-hidden="true">
+      <span class="step active" data-step="1"></span>
+      <span class="step" data-step="2"></span>
+      <span class="step" data-step="3"></span>
+      <span class="step" data-step="4"></span>
+      <span class="step" data-step="5"></span>
+    </div>
+    <div class="modal-body" id="bookBody">
+      <!-- step 1: service -->
+      <div class="step-pane" data-pane="1">
+        <p style="color:var(--muted);margin:0 0 14px;">Pick what we're doing today.</p>
+        <div class="opt-grid" id="serviceOpts">
+          <button type="button" class="opt" data-svc="cut" aria-pressed="true">
+            <b>Architectural cut</b><small>Consult, shampoo, precision cut, finish.</small><span class="opt-price">from $84</span>
+          </button>
+          <button type="button" class="opt" data-svc="single">
+            <b>Tonal refresh</b><small>Single-process root or all-over.</small><span class="opt-price">from $148</span>
+          </button>
+          <button type="button" class="opt" data-svc="highlights">
+            <b>Sun-drawn highlights</b><small>Hand-painted balayage.</small><span class="opt-price">from $265</span>
+          </button>
+          <button type="button" class="opt" data-svc="treatment">
+            <b>Repair &amp; gloss</b><small>Olaplex bond + finishing gloss.</small><span class="opt-price">from $72</span>
+          </button>
+          <button type="button" class="opt" data-svc="bridal">
+            <b>Bridal &amp; editorial</b><small>Trial included. Book 6 wks ahead.</small><span class="opt-price">from $185</span>
+          </button>
+          <button type="button" class="opt" data-svc="kids">
+            <b>Younger guests</b><small>Under 12. Patient stylists, low chairs.</small><span class="opt-price">from $42</span>
+          </button>
+        </div>
+      </div>
+      <!-- step 2: stylist -->
+      <div class="step-pane" data-pane="2" hidden>
+        <p style="color:var(--muted);margin:0 0 14px;">Match yourself to the right chair.</p>
+        <div class="opt-grid" id="stylistOpts" style="grid-template-columns:1fr;">
+          <button type="button" class="opt opt-stylist" data-stylist="any" aria-pressed="true">
+            <span class="av" style="background:linear-gradient(135deg,var(--blue),var(--indigo));"></span>
+            <span><b>No preference</b><small>Match me with any available stylist.</small></span>
+          </button>
+          <button type="button" class="opt opt-stylist" data-stylist="ava">
+            <span class="av" style="background-image:url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=200&q=70');"></span>
+            <span><b>Ava L.</b><small>Master stylist · curls, layered cuts</small></span>
+          </button>
+          <button type="button" class="opt opt-stylist" data-stylist="nico">
+            <span class="av" style="background-image:url('https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=200&q=70');"></span>
+            <span><b>Nico V.</b><small>Master colourist · sun-drawn blondes</small></span>
+          </button>
+          <button type="button" class="opt opt-stylist" data-stylist="lena">
+            <span class="av" style="background-image:url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=70');"></span>
+            <span><b>Lena H.</b><small>Stylist · short hair, fringes</small></span>
+          </button>
+          <button type="button" class="opt opt-stylist" data-stylist="kai">
+            <span class="av" style="background-image:url('https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?auto=format&fit=crop&w=200&q=70');"></span>
+            <span><b>Kai M.</b><small>Stylist · textured cuts, fades</small></span>
+          </button>
+        </div>
+      </div>
+      <!-- step 3: date -->
+      <div class="step-pane" data-pane="3" hidden>
+        <p style="color:var(--muted);margin:0 0 14px;">Next 7 days. Greyed dates are full.</p>
+        <div class="opt-grid" id="dateOpts" style="grid-template-columns:repeat(4,1fr);"></div>
+      </div>
+      <!-- step 4: time -->
+      <div class="step-pane" data-pane="4" hidden>
+        <p style="color:var(--muted);margin:0 0 14px;">Available times for <b id="dateLabel">your date</b>.</p>
+        <div class="slots" id="modalSlots"></div>
+      </div>
+      <!-- step 5: contact + review -->
+      <div class="step-pane" data-pane="5" hidden>
+        <div class="field" style="margin-bottom:12px;">
+          <label>Name</label>
+          <input class="field-input" id="bkName" autocomplete="name" placeholder="Your name">
+        </div>
+        <div class="field" style="margin-bottom:12px;">
+          <label>Email</label>
+          <input type="email" class="field-input" id="bkEmail" autocomplete="email" placeholder="you@example.com">
+        </div>
+        <div class="field" style="margin-bottom:18px;">
+          <label>Phone (optional)</label>
+          <input type="tel" class="field-input" id="bkPhone" autocomplete="tel" placeholder="(555) 555-0199">
+        </div>
+        <h3 style="font-family:var(--serif);font-weight:500;font-size:18px;margin:0 0 8px;">Your appointment</h3>
+        <dl style="margin:0;">
+          <div class="review-line"><dt>Service</dt><dd id="rvService">—</dd></div>
+          <div class="review-line"><dt>Stylist</dt><dd id="rvStylist">—</dd></div>
+          <div class="review-line"><dt>Date</dt><dd id="rvDate">—</dd></div>
+          <div class="review-line"><dt>Time</dt><dd id="rvTime">—</dd></div>
+          <div class="review-line"><dt>Estimate</dt><dd id="rvPrice">—</dd></div>
+        </dl>
+      </div>
+      <!-- step 6: confirmation -->
+      <div class="step-pane" data-pane="done" hidden>
+        <div class="booked-banner">
+          <div class="check"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
+          <h3>You're booked.</h3>
+          <p>We've sent a confirmation to your email. Reply STOP to opt out of reminders.</p>
+        </div>
+        <p style="color:var(--muted);font-size:13.5px;margin:0;">Need to change something? Call us at <a href="tel:+15552470182" style="color:var(--blue);">(555) 247-0182</a> — we'll handle it.</p>
+      </div>
+    </div>
+    <div class="modal-foot" id="bookFoot">
+      <button type="button" class="btn ghost" id="bookBack" disabled>Back</button>
+      <button type="button" class="btn" id="bookNext">Next</button>
+    </div>
+  </div>
+</div>
+
+<!-- ——— Stylist profile modal ——— -->
+<div class="modal" id="stylistModal" role="dialog" aria-modal="true" aria-labelledby="stylistModalTitle" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h2 id="stylistModalTitle">Stylist</h2>
+      <button class="modal-close" id="stylistClose" aria-label="Close profile">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="stylist-hero" id="stylistHero"></div>
+      <div class="stylist-meta">
+        <div class="row"><dt>Role</dt><dd id="smRole">—</dd></div>
+        <div class="row"><dt>Specialty</dt><dd id="smSpec">—</dd></div>
+        <div class="row"><dt>Years</dt><dd id="smYears">—</dd></div>
+        <div class="row"><dt>Speaks</dt><dd id="smLang">—</dd></div>
+        <div class="row"><dt>Instagram</dt><dd><a id="smIG" href="#" style="color:var(--blue);border-bottom:1px solid var(--line)">—</a></dd></div>
+        <div>
+          <p style="color:var(--muted);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;margin:14px 0 8px;">Next openings</p>
+          <div class="stylist-slots" id="smSlots"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn ghost" id="smCancel">Close</button>
+      <button type="button" class="btn js-book-open" id="smBook">Book with this stylist</button>
+    </div>
+  </div>
+</div>
+
+<!-- ——— Lightbox ——— -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lb-close" id="lbClose" aria-label="Close">×</button>
+  <button class="lb-btn prev" id="lbPrev" aria-label="Previous">‹</button>
+  <img id="lbImg" alt="" />
+  <button class="lb-btn next" id="lbNext" aria-label="Next">›</button>
+  <div class="lb-counter" id="lbCounter">1 / 7</div>
+</div>
 
 <script>
 (function () {
@@ -1374,6 +1837,254 @@
       sessionStorage.setItem("indigo-chat-seen", "1");
     }
   }, 8000);
+
+  // ——— Dismissible announcement bar ———
+  const annBar = document.getElementById("annBar");
+  const annClose = document.getElementById("annClose");
+  if (localStorage.getItem("indigo-ann-dismissed") === "1") annBar.classList.add("hidden");
+  annClose.addEventListener("click", () => {
+    annBar.classList.add("hidden");
+    localStorage.setItem("indigo-ann-dismissed", "1");
+  });
+
+  // ——— Modal helpers ———
+  let lastFocus = null;
+  function openModal(el) {
+    lastFocus = document.activeElement;
+    el.classList.add("open");
+    el.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    const focusable = el.querySelector("button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])");
+    if (focusable) setTimeout(() => focusable.focus(), 50);
+  }
+  function closeModal(el) {
+    el.classList.remove("open");
+    el.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      document.querySelectorAll(".modal.open, .lightbox.open").forEach(closeModal);
+    }
+  });
+  // backdrop click closes
+  document.querySelectorAll(".modal").forEach((m) => {
+    m.addEventListener("click", (e) => { if (e.target === m) closeModal(m); });
+  });
+
+  // ——— Booking modal flow ———
+  const bookModal = document.getElementById("bookModal");
+  const bookBody = document.getElementById("bookBody");
+  const bookStepPill = document.getElementById("bookStep");
+  const bookTitle = document.getElementById("bookModalTitle");
+  const bookBack = document.getElementById("bookBack");
+  const bookNext = document.getElementById("bookNext");
+  const TITLES = ["Choose a service", "Choose a stylist", "Pick a date", "Pick a time", "Your details", "Confirmed"];
+  const SERVICE_LABELS = { cut:"Architectural cut", single:"Tonal refresh", highlights:"Sun-drawn highlights", treatment:"Repair & gloss", bridal:"Bridal & editorial", kids:"Younger guests" };
+  const SERVICE_PRICE = { cut:"from $84", single:"from $148", highlights:"from $265", treatment:"from $72", bridal:"from $185", kids:"from $42" };
+  const STYLIST_LABELS = { any:"No preference", ava:"Ava L.", nico:"Nico V.", lena:"Lena H.", kai:"Kai M." };
+  const state = { step: 1, svc: "cut", stylist: "any", date: null, time: null };
+
+  function paintDates() {
+    const grid = document.getElementById("dateOpts");
+    grid.innerHTML = "";
+    const today = new Date();
+    const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    for (let i = 1; i <= 8; i++) {
+      const d = new Date(today.getTime() + i * 86400000);
+      const isMonday = d.getDay() === 1;
+      const id = d.toISOString().slice(0,10);
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "opt";
+      btn.style.padding = "12px 8px";
+      btn.style.textAlign = "center";
+      btn.dataset.date = id;
+      btn.dataset.label = days[d.getDay()] + " " + d.getDate();
+      btn.innerHTML = "<b>" + days[d.getDay()] + "</b><small>" + d.getDate() + "</small>";
+      if (isMonday) { btn.disabled = true; btn.style.opacity = "0.4"; btn.title = "Closed Mondays"; }
+      grid.appendChild(btn);
+    }
+  }
+  function paintTimes() {
+    const wrap = document.getElementById("modalSlots");
+    wrap.innerHTML = "";
+    const times = ["09:30","10:15","11:00","11:45","12:30","14:00","14:45","15:30","16:15","17:00","17:45","18:30"];
+    times.forEach((t, idx) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "slot";
+      b.textContent = t;
+      if (idx % 4 === 1) { b.disabled = true; }
+      b.dataset.time = t;
+      wrap.appendChild(b);
+    });
+  }
+  function setStep(s) {
+    state.step = s;
+    bookBody.querySelectorAll(".step-pane").forEach((p) => p.hidden = (p.dataset.pane !== String(s) && !(s === 6 && p.dataset.pane === "done")));
+    document.querySelectorAll(".stepper .step").forEach((el, i) => {
+      el.classList.toggle("active", i + 1 === s);
+      el.classList.toggle("done", i + 1 < s);
+    });
+    bookStepPill.textContent = s <= 5 ? ("Step " + s + " of 5") : "Done";
+    bookTitle.textContent = TITLES[Math.min(s, TITLES.length) - 1];
+    bookBack.disabled = (s === 1 || s === 6);
+    bookBack.style.visibility = (s === 6) ? "hidden" : "";
+    bookNext.textContent = s === 5 ? "Confirm booking" : (s === 6 ? "Done" : "Next");
+    if (s === 5) {
+      document.getElementById("rvService").textContent = SERVICE_LABELS[state.svc];
+      document.getElementById("rvStylist").textContent = STYLIST_LABELS[state.stylist];
+      document.getElementById("rvDate").textContent = state.dateLabel || "—";
+      document.getElementById("rvTime").textContent = state.time || "—";
+      document.getElementById("rvPrice").textContent = SERVICE_PRICE[state.svc];
+    }
+  }
+  function openBook(prefSvc) {
+    if (prefSvc && SERVICE_LABELS[prefSvc]) {
+      state.svc = prefSvc;
+      document.querySelectorAll("#serviceOpts .opt").forEach((b) => b.setAttribute("aria-pressed", b.dataset.svc === prefSvc ? "true" : "false"));
+    }
+    setStep(1);
+    paintDates();
+    paintTimes();
+    openModal(bookModal);
+  }
+  document.querySelectorAll(".js-book-open").forEach((b) => {
+    b.addEventListener("click", (e) => {
+      e.preventDefault();
+      // estimator → carry the picked service
+      let svc = state.svc;
+      if (b.id === "estBookBtn") svc = estService;
+      if (b.dataset.preset) svc = b.dataset.preset;
+      // stylist modal book button → carry the stylist
+      if (b.id === "smBook" && currentStylistKey) state.stylist = currentStylistKey;
+      if (b.id === "smBook") closeModal(document.getElementById("stylistModal"));
+      openBook(svc);
+    });
+  });
+  document.getElementById("bookClose").addEventListener("click", () => closeModal(bookModal));
+  // service selection
+  document.getElementById("serviceOpts").addEventListener("click", (e) => {
+    const b = e.target.closest(".opt"); if (!b) return;
+    state.svc = b.dataset.svc;
+    e.currentTarget.querySelectorAll(".opt").forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+  });
+  // stylist selection
+  document.getElementById("stylistOpts").addEventListener("click", (e) => {
+    const b = e.target.closest(".opt"); if (!b) return;
+    state.stylist = b.dataset.stylist;
+    e.currentTarget.querySelectorAll(".opt").forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+  });
+  // date selection
+  document.getElementById("dateOpts").addEventListener("click", (e) => {
+    const b = e.target.closest(".opt"); if (!b || b.disabled) return;
+    state.date = b.dataset.date;
+    state.dateLabel = b.dataset.label;
+    e.currentTarget.querySelectorAll(".opt").forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+    document.getElementById("dateLabel").textContent = b.dataset.label;
+  });
+  // time selection
+  document.getElementById("modalSlots").addEventListener("click", (e) => {
+    const b = e.target.closest(".slot"); if (!b || b.disabled) return;
+    state.time = b.dataset.time;
+    e.currentTarget.querySelectorAll(".slot").forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+  });
+  // back/next
+  bookBack.addEventListener("click", () => { if (state.step > 1 && state.step <= 5) setStep(state.step - 1); });
+  bookNext.addEventListener("click", () => {
+    if (state.step === 1) { setStep(2); return; }
+    if (state.step === 2) { setStep(3); return; }
+    if (state.step === 3) {
+      if (!state.date) { showToast("Pick a date first"); return; }
+      setStep(4); return;
+    }
+    if (state.step === 4) {
+      if (!state.time) { showToast("Pick a time first"); return; }
+      setStep(5); return;
+    }
+    if (state.step === 5) {
+      const email = (document.getElementById("bkEmail").value || "").trim();
+      const name = (document.getElementById("bkName").value || "").trim();
+      if (!name) { showToast("Add your name"); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast("Add a valid email"); return; }
+      setStep(6); return;
+    }
+    if (state.step === 6) {
+      closeModal(bookModal);
+      showToast("Booking saved — see you soon");
+    }
+  });
+
+  // ——— Stylist profile modal ———
+  const STYLISTS = {
+    ava:  { name:"Ava L.", role:"Master stylist", spec:"Curls, layered cuts, postpartum hair", years:"14 years on the floor", lang:"English, Italian", ig:"@ava.cuts", img:"https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&q=80" },
+    nico: { name:"Nico V.", role:"Master colourist", spec:"Sun-drawn blondes, copper, correction work", years:"11 years", lang:"English, Spanish", ig:"@nico.colour", img:"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80" },
+    lena: { name:"Lena H.", role:"Stylist", spec:"Short hair, fringes, men's scissor cuts", years:"6 years", lang:"English, German", ig:"@lena.crops", img:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" },
+    kai:  { name:"Kai M.", role:"Stylist", spec:"Textured cuts, fades, beard work", years:"5 years", lang:"English, Korean", ig:"@kai.cuts", img:"https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?auto=format&fit=crop&w=900&q=80" },
+  };
+  const SAMPLE_NEXT = ["Tomorrow 11:00", "Tomorrow 15:30", "Fri 10:15", "Fri 14:00", "Sat 09:30"];
+  const stylistModal = document.getElementById("stylistModal");
+  let currentStylistKey = null;
+  function openStylist(key) {
+    const s = STYLISTS[key]; if (!s) return;
+    currentStylistKey = key;
+    document.getElementById("stylistModalTitle").textContent = s.name;
+    document.getElementById("stylistHero").style.backgroundImage = `url('${s.img}')`;
+    document.getElementById("smRole").textContent = s.role;
+    document.getElementById("smSpec").textContent = s.spec;
+    document.getElementById("smYears").textContent = s.years;
+    document.getElementById("smLang").textContent = s.lang;
+    const ig = document.getElementById("smIG"); ig.textContent = s.ig; ig.href = "https://instagram.com/" + s.ig.replace("@","");
+    const slots = document.getElementById("smSlots"); slots.innerHTML = "";
+    SAMPLE_NEXT.forEach((t) => { const b = document.createElement("button"); b.type="button"; b.className="slot"; b.textContent = t; slots.appendChild(b); });
+    openModal(stylistModal);
+  }
+  document.getElementById("teamGrid").addEventListener("click", (e) => {
+    const card = e.target.closest("[data-stylist]"); if (!card) return;
+    openStylist(card.dataset.stylist);
+  });
+  document.getElementById("teamGrid").addEventListener("keydown", (e) => {
+    if ((e.key === "Enter" || e.key === " ") && e.target.dataset.stylist) {
+      e.preventDefault(); openStylist(e.target.dataset.stylist);
+    }
+  });
+  document.getElementById("stylistClose").addEventListener("click", () => closeModal(stylistModal));
+  document.getElementById("smCancel").addEventListener("click", () => closeModal(stylistModal));
+
+  // ——— Lightbox ———
+  const lb = document.getElementById("lightbox");
+  const lbImg = document.getElementById("lbImg");
+  const lbCounter = document.getElementById("lbCounter");
+  const galleryItems = Array.from(document.querySelectorAll(".g-item"));
+  let lbIdx = 0;
+  function showLb(i) {
+    lbIdx = (i + galleryItems.length) % galleryItems.length;
+    const item = galleryItems[lbIdx];
+    lbImg.src = item.dataset.src;
+    lbImg.alt = item.getAttribute("aria-label") || "";
+    lbCounter.textContent = (lbIdx + 1) + " / " + galleryItems.length;
+  }
+  galleryItems.forEach((a, i) => {
+    a.addEventListener("click", (e) => { e.preventDefault(); showLb(i); openModal(lb); });
+  });
+  document.getElementById("lbClose").addEventListener("click", () => closeModal(lb));
+  document.getElementById("lbPrev").addEventListener("click", () => showLb(lbIdx - 1));
+  document.getElementById("lbNext").addEventListener("click", () => showLb(lbIdx + 1));
+  lb.addEventListener("click", (e) => { if (e.target === lb) closeModal(lb); });
+  document.addEventListener("keydown", (e) => {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "ArrowLeft") showLb(lbIdx - 1);
+    if (e.key === "ArrowRight") showLb(lbIdx + 1);
+  });
+  // touch swipe
+  let tx = 0;
+  lb.addEventListener("touchstart", (e) => { tx = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener("touchend", (e) => {
+    const dx = (e.changedTouches[0].clientX - tx);
+    if (Math.abs(dx) > 50) showLb(lbIdx + (dx < 0 ? 1 : -1));
+  });
 })();
 </script>
 
