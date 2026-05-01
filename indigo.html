@@ -89,7 +89,7 @@
     background: var(--bg);
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 16px;
+    font-size: clamp(15px, 1.4vw, 16px);
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -131,7 +131,7 @@
   /* —— Marquee bar —— */
   .bar {
     background: var(--ink); color: var(--bg);
-    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    font-size: clamp(10.5px, 1.3vw, 12px); letter-spacing: 0.14em; text-transform: uppercase;
     padding: 10px var(--pad);
     display: flex; align-items: center; justify-content: space-between; gap: 16px;
   }
@@ -157,7 +157,7 @@
     display: inline-flex; align-items: center; gap: 12px;
     font-family: var(--serif);
     font-weight: 500;
-    font-size: 24px;
+    font-size: clamp(20px, 2.2vw, 24px);
     letter-spacing: 0.18em;
   }
   .logo .mark {
@@ -237,8 +237,8 @@
   .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--blue); }
   .h-title {
     font-family: var(--serif); font-weight: 500;
-    font-size: clamp(54px, 10vw, 132px);
-    line-height: 0.92; letter-spacing: -0.015em;
+    font-size: clamp(38px, 11vw, 124px);
+    line-height: 0.94; letter-spacing: -0.015em;
     margin: 18px 0 0;
   }
   .h-title em {
@@ -249,16 +249,16 @@
     font-variation-settings: "opsz" 144;
   }
   .h-lede {
-    margin-top: 24px;
+    margin-top: 20px;
     font-family: var(--serif); font-style: italic;
-    font-size: clamp(20px, 2.4vw, 26px);
-    line-height: 1.4; color: var(--ink-2);
+    font-size: clamp(16px, 2.4vw, 24px);
+    line-height: 1.45; color: var(--ink-2);
     max-width: 32ch;
   }
   .h-meta {
-    margin-top: 28px;
-    display: flex; flex-wrap: wrap; gap: 12px 24px;
-    font-size: 13px; color: var(--muted);
+    margin-top: 24px;
+    display: flex; flex-wrap: wrap; gap: 10px 22px;
+    font-size: clamp(12px, 1.5vw, 13px); color: var(--muted);
   }
   .h-meta b { color: var(--ink); font-weight: 500; }
   .h-meta .live { display: inline-flex; align-items: center; gap: 6px; }
@@ -329,15 +329,15 @@
   }
   .section-title {
     font-family: var(--serif); font-weight: 500;
-    font-size: clamp(34px, 5vw, 60px);
-    line-height: 1.04; letter-spacing: -0.01em; margin: 0;
+    font-size: clamp(26px, 5.4vw, 56px);
+    line-height: 1.06; letter-spacing: -0.01em; margin: 0;
   }
   .section-title em {
     font-style: italic; font-weight: 400;
     background: linear-gradient(135deg, #5C8DEA, #1E58C8 60%, #2A2F75);
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  .section-lede { color: var(--ink-2); font-size: 17px; max-width: 56ch; margin: 0; }
+  .section-lede { color: var(--ink-2); font-size: clamp(14.5px, 1.8vw, 17px); max-width: 56ch; margin: 0; }
 
   /* —— Press —— */
   .press {
@@ -376,12 +376,12 @@
   }
   .service-name {
     font-family: var(--serif);
-    font-size: clamp(22px, 2.4vw, 28px);
-    font-weight: 500; line-height: 1.15; margin: 0;
+    font-size: clamp(17px, 2.4vw, 26px);
+    font-weight: 500; line-height: 1.2; margin: 0;
   }
-  .service-desc { color: var(--muted); font-size: 14.5px; grid-column: 1 / -1; margin: 0; }
+  .service-desc { color: var(--muted); font-size: clamp(13px, 1.6vw, 14.5px); grid-column: 1 / -1; margin: 0; }
   @media (min-width: 720px) { .service-desc { grid-column: auto; max-width: 56ch; } }
-  .service-price { font-feature-settings: "tnum" 1; font-size: 15px; white-space: nowrap; }
+  .service-price { font-feature-settings: "tnum" 1; font-size: clamp(13.5px, 1.6vw, 15px); white-space: nowrap; }
   .service-price small { color: var(--muted); font-weight: 400; }
 
   /* —— Estimator —— */
@@ -399,9 +399,9 @@
   @media (min-width: 880px) { .estimator { grid-template-columns: 1.1fr 1fr; align-items: center; gap: 40px; } }
   .estimator h3 {
     font-family: var(--serif); font-weight: 500;
-    font-size: clamp(28px, 3.4vw, 40px); line-height: 1.05; margin: 0 0 8px;
+    font-size: clamp(22px, 3.4vw, 38px); line-height: 1.1; margin: 0 0 8px;
   }
-  .estimator p { color: var(--ink-2); margin: 0; }
+  .estimator p { color: var(--ink-2); font-size: clamp(14px, 1.7vw, 16px); margin: 0; }
   .est-form { display: grid; gap: 14px; }
   .field { display: grid; gap: 8px; }
   .field label { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
@@ -432,8 +432,8 @@
     box-shadow: var(--shadow-1);
   }
   .est-out .label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-  .est-out .price { font-family: var(--serif); font-size: 32px; font-weight: 500; color: var(--blue-2); }
-  .est-out .price small { font-size: 14px; color: var(--muted); font-weight: 400; }
+  .est-out .price { font-family: var(--serif); font-size: clamp(24px, 4.2vw, 32px); font-weight: 500; color: var(--blue-2); }
+  .est-out .price small { font-size: clamp(12.5px, 1.6vw, 14px); color: var(--muted); font-weight: 400; }
 
   /* —— Team —— */
   .team-grid {
@@ -464,9 +464,9 @@
     transition: opacity var(--t-med);
   }
   .stylist:hover .stylist-photo { box-shadow: var(--shadow-3); }
-  .stylist h3 { font-family: var(--serif); font-weight: 500; font-size: 22px; margin: 6px 0 0; }
-  .stylist .role { color: var(--blue); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
-  .stylist p { color: var(--muted); font-size: 14px; margin: 0; }
+  .stylist h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(18px, 2.2vw, 22px); margin: 6px 0 0; }
+  .stylist .role { color: var(--blue); font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .stylist p { color: var(--muted); font-size: clamp(13px, 1.6vw, 14px); margin: 0; }
 
   /* —— Gallery —— */
   .gallery {
@@ -526,10 +526,10 @@
   .review .stars { color: #F2B948; letter-spacing: 2px; font-size: 13px; }
   .review blockquote {
     font-family: var(--serif); font-style: italic;
-    font-size: 18px; line-height: 1.5;
+    font-size: clamp(15px, 1.9vw, 18px); line-height: 1.5;
     margin: 0; color: var(--ink);
   }
-  .review cite { color: var(--muted); font-style: normal; font-size: 13px; letter-spacing: 0.04em; }
+  .review cite { color: var(--muted); font-style: normal; font-size: 12.5px; letter-spacing: 0.04em; }
 
   /* —— Booking —— */
   .booking {
@@ -559,13 +559,13 @@
   }
   .booking-image em {
     font-family: var(--serif);
-    font-size: 22px; line-height: 1.3;
+    font-size: clamp(16px, 2.2vw, 22px); line-height: 1.35;
     font-style: italic;
     max-width: 24ch;
     position: relative;
   }
   .booking-card { padding: clamp(24px, 4vw, 36px); display: grid; gap: 22px; box-shadow: var(--shadow-2); }
-  .booking-card h3 { font-family: var(--serif); font-weight: 500; font-size: 28px; margin: 0; }
+  .booking-card h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(20px, 2.8vw, 28px); margin: 0; }
   .slots { display: grid; gap: 10px; grid-template-columns: repeat(3, 1fr); }
   .slot {
     border: 1px solid var(--line);
@@ -595,12 +595,12 @@
   .nl-inner { max-width: 720px; margin: 0 auto; text-align: center; }
   .nl-inner h2 {
     font-family: var(--serif);
-    font-size: clamp(34px, 5vw, 56px);
-    line-height: 1.05;
+    font-size: clamp(26px, 5.4vw, 52px);
+    line-height: 1.08;
     margin: 0 auto 14px;
     max-width: 18ch;
   }
-  .nl-inner p { color: var(--ink-2); margin: 0 auto 24px; max-width: 48ch; }
+  .nl-inner p { color: var(--ink-2); font-size: clamp(14px, 1.7vw, 16px); margin: 0 auto 24px; max-width: 48ch; }
   .nl-form { display: grid; gap: 8px; grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
   @media (min-width: 600px) { .nl-form { grid-template-columns: 1fr auto; } }
   .nl-form input {
@@ -665,7 +665,7 @@
     display: grid; gap: 20px;
     box-shadow: var(--shadow-2);
   }
-  .info-card h3 { font-family: var(--serif); font-weight: 500; font-size: 28px; margin: 0; }
+  .info-card h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(20px, 2.8vw, 28px); margin: 0; }
   .info-row { display: grid; grid-template-columns: 110px 1fr; gap: 16px; align-items: start; font-size: 14.5px; margin: 0; }
   .info-row dt { color: var(--muted); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; padding-top: 3px; }
   .info-row dd { margin: 0; color: var(--ink); }
@@ -901,7 +901,7 @@
   }
   .modal-head h2 {
     font-family: var(--serif); font-weight: 500;
-    font-size: 22px; margin: 0; flex: 1;
+    font-size: clamp(17px, 2.4vw, 22px); margin: 0; flex: 1;
   }
   .modal-head .step-pill {
     font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
@@ -962,9 +962,9 @@
     background: linear-gradient(180deg, var(--surface), var(--blue-soft));
     box-shadow: 0 0 0 2px color-mix(in oklab, var(--blue) 20%, transparent), var(--shadow-2);
   }
-  .opt b { font-family: var(--serif); font-weight: 500; font-size: 16px; }
-  .opt small { color: var(--muted); font-size: 12px; }
-  .opt-price { color: var(--blue-2); font-size: 13px; font-weight: 500; }
+  .opt b { font-family: var(--serif); font-weight: 500; font-size: clamp(14.5px, 1.7vw, 16px); }
+  .opt small { color: var(--muted); font-size: 11.5px; line-height: 1.4; }
+  .opt-price { color: var(--blue-2); font-size: 12.5px; font-weight: 500; }
 
   .opt-stylist { grid-template-columns: auto 1fr; align-items: center; gap: 14px; padding: 12px 14px; }
   .opt-stylist .av {
