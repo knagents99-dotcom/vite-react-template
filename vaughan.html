@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#F7F3EE" />
+<title>Fiorio Vaughan — Hair Salon at Vaughan Mills</title>
+<meta name="description" content="Fiorio Vaughan. Cut, colour, and care from a team trained in the Italian tradition. Inside Vaughan Mills." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory: #F7F3EE;
+    --ivory-2: #EFE9E1;
+    --line: #E2DACE;
+    --ink: #15110E;
+    --ink-2: #3A332C;
+    --muted: #6E6258;
+    --rust: #9D5A36;
+    --rust-ink: #6F3F25;
+    --gold: #B89368;
+    --radius: 2px;
+    --max: 1200px;
+    --pad: clamp(20px, 5vw, 56px);
+    --serif: "Cormorant Garamond", "Times New Roman", serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ivory);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; }
+
+  /* ——— Marquee bar ——— */
+  .bar {
+    background: var(--ink);
+    color: var(--ivory);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 10px var(--pad);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+  }
+  .bar a { color: var(--ivory); border-bottom: 1px solid rgba(247,243,238,0.35); padding-bottom: 1px; }
+  .bar .hide-sm { display: none; }
+  @media (min-width: 720px) { .bar .hide-sm { display: inline; } }
+
+  /* ——— Nav ——— */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(247,243,238,0.92);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 16px var(--pad);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+  }
+  .logo {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 24px;
+    letter-spacing: 0.18em;
+  }
+  .logo small {
+    display: block;
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: var(--muted);
+    margin-top: 2px;
+    text-transform: uppercase;
+  }
+  .nav ul { display: none; list-style: none; gap: 28px; margin: 0; padding: 0; }
+  .nav ul a {
+    font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-2); padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 200ms ease, color 200ms ease;
+  }
+  .nav ul a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  @media (min-width: 880px) { .nav ul { display: flex; } }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 20px;
+    border: 1px solid var(--ink);
+    background: var(--ink); color: var(--ivory);
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background 200ms ease, color 200ms ease, transform 200ms ease;
+  }
+  .btn:hover { background: transparent; color: var(--ink); }
+  .btn.ghost { background: transparent; color: var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: var(--ivory); }
+  .btn.small { padding: 9px 14px; font-size: 11px; }
+
+  /* ——— Hero ——— */
+  .hero {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: clamp(36px, 7vw, 96px) var(--pad) clamp(48px, 8vw, 120px);
+    display: grid; gap: clamp(24px, 4vw, 56px);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 980px) { .hero { grid-template-columns: 1.05fr 1fr; align-items: end; } }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--rust);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before {
+    content: ""; width: 28px; height: 1px; background: var(--rust);
+  }
+  .h-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(54px, 10vw, 124px);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    margin: 18px 0 0;
+  }
+  .h-title em {
+    font-style: italic; color: var(--rust); font-weight: 400;
+  }
+  .h-lede {
+    margin-top: 24px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2.4vw, 26px);
+    line-height: 1.4;
+    color: var(--ink-2);
+    max-width: 32ch;
+  }
+  .h-meta {
+    margin-top: 28px;
+    display: flex; flex-wrap: wrap; gap: 12px 24px;
+    font-size: 13px; color: var(--muted);
+  }
+  .h-meta b { color: var(--ink); font-weight: 500; }
+  .h-cta {
+    margin-top: 32px;
+    display: flex; flex-wrap: wrap; gap: 12px;
+  }
+  .hero-image {
+    aspect-ratio: 4/5;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.0) 60%, rgba(0,0,0,0.35) 100%),
+      url("https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80") center/cover no-repeat,
+      var(--ivory-2);
+    border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-image::after {
+    content: "Vaughan Mills · Est. since 1973 in Toronto";
+    position: absolute; left: 20px; bottom: 18px;
+    color: var(--ivory);
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  }
+
+  /* ——— Section primitives ——— */
+  section { padding: clamp(56px, 8vw, 112px) var(--pad); }
+  .section-head {
+    max-width: var(--max);
+    margin: 0 auto clamp(28px, 4vw, 56px);
+    display: grid; gap: 16px;
+  }
+  @media (min-width: 880px) {
+    .section-head { grid-template-columns: 1fr 1.4fr; align-items: end; gap: 48px; }
+  }
+  .section-title {
+    font-family: var(--serif); font-weight: 500;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.05; letter-spacing: -0.005em; margin: 0;
+  }
+  .section-title em { font-style: italic; color: var(--rust); font-weight: 400; }
+  .section-lede { color: var(--ink-2); font-size: 17px; max-width: 56ch; }
+
+  /* ——— About ——— */
+  .about { background: var(--ivory-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .about-grid {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid; gap: clamp(24px, 4vw, 56px);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 880px) { .about-grid { grid-template-columns: 1fr 1fr; align-items: center; } }
+  .about p { font-size: 17px; color: var(--ink-2); margin: 0 0 16px; }
+  .about p:first-of-type::first-letter {
+    font-family: var(--serif);
+    font-size: 5em;
+    float: left;
+    line-height: 0.85;
+    padding: 6px 12px 0 0;
+    color: var(--rust);
+  }
+  .about-image {
+    aspect-ratio: 5/6;
+    background:
+      url("https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=80") center/cover no-repeat,
+      var(--ivory);
+    border-radius: var(--radius);
+  }
+
+  /* ——— Services ——— */
+  .services-list {
+    max-width: var(--max);
+    margin: 0 auto;
+    border-top: 1px solid var(--line);
+  }
+  .service {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px 24px;
+    align-items: baseline;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  @media (min-width: 720px) {
+    .service { grid-template-columns: 1.6fr 2fr auto; }
+  }
+  .service-name {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.4vw, 28px);
+    font-weight: 500;
+    line-height: 1.15;
+  }
+  .service-desc {
+    color: var(--muted);
+    font-size: 14.5px;
+    grid-column: 1 / -1;
+  }
+  @media (min-width: 720px) {
+    .service-desc { grid-column: auto; max-width: 56ch; }
+  }
+  .service-price {
+    font-feature-settings: "tnum" 1;
+    font-size: 15px;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .service-price small { color: var(--muted); font-weight: 400; }
+
+  /* ——— Team ——— */
+  .team {
+    background: var(--ink);
+    color: var(--ivory);
+  }
+  .team .section-title { color: var(--ivory); }
+  .team .section-lede { color: rgba(247,243,238,0.72); }
+  .team-grid {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid; gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .stylist {
+    display: grid; gap: 12px;
+  }
+  .stylist-photo {
+    aspect-ratio: 4/5;
+    background-color: #2a221b;
+    background-size: cover; background-position: center;
+    border-radius: var(--radius);
+    filter: grayscale(0.15) contrast(1.02);
+  }
+  .stylist h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 24px;
+    margin: 6px 0 0;
+  }
+  .stylist .role {
+    color: var(--gold);
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .stylist p { color: rgba(247,243,238,0.7); font-size: 14px; margin: 0; }
+
+  /* ——— Visit ——— */
+  .visit-grid {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid; gap: clamp(24px, 4vw, 48px);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 880px) { .visit-grid { grid-template-columns: 1.1fr 1fr; } }
+  .map {
+    aspect-ratio: 4/3;
+    background:
+      radial-gradient(circle at 60% 40%, rgba(157,90,54,0.12), transparent 60%),
+      repeating-linear-gradient(45deg, var(--ivory-2) 0 12px, var(--ivory) 12px 24px);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+  }
+  .map::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: linear-gradient(transparent 49%, var(--line) 50%, transparent 51%),
+                      linear-gradient(90deg, transparent 49%, var(--line) 50%, transparent 51%);
+    background-size: 64px 64px;
+    opacity: 0.6;
+  }
+  .map .pin {
+    position: absolute; left: 50%; top: 50%;
+    width: 14px; height: 14px;
+    background: var(--rust);
+    border: 3px solid var(--ivory);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 6px rgba(157,90,54,0.18), 0 4px 12px rgba(0,0,0,0.18);
+  }
+  .map .label {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, calc(-50% - 28px));
+    background: var(--ink); color: var(--ivory);
+    padding: 6px 10px;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    border-radius: var(--radius);
+    white-space: nowrap;
+  }
+  .info-card {
+    background: var(--ivory);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(24px, 4vw, 36px);
+    display: grid; gap: 22px;
+  }
+  .info-card h3 {
+    font-family: var(--serif); font-weight: 500;
+    font-size: 28px; margin: 0;
+  }
+  .info-row { display: grid; grid-template-columns: 110px 1fr; gap: 16px; align-items: start; font-size: 14.5px; }
+  .info-row dt { color: var(--muted); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; padding-top: 3px; }
+  .info-row dd { margin: 0; color: var(--ink); }
+  .hours { display: grid; gap: 4px; font-variant-numeric: tabular-nums; }
+  .hours div { display: grid; grid-template-columns: 110px 1fr; }
+  .hours span:last-child { color: var(--ink-2); }
+  .info-card .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  /* ——— CTA ——— */
+  .cta-banner {
+    text-align: center;
+    background: var(--ivory-2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .cta-banner h2 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 500;
+    line-height: 1.05;
+    margin: 0 auto 16px;
+    max-width: 18ch;
+    letter-spacing: -0.01em;
+  }
+  .cta-banner h2 em { color: var(--rust); font-style: italic; font-weight: 400; }
+  .cta-banner p { color: var(--ink-2); margin: 0 auto 28px; max-width: 48ch; }
+
+  /* ——— Footer ——— */
+  footer {
+    background: var(--ink);
+    color: rgba(247,243,238,0.7);
+    padding: 56px var(--pad) 32px;
+  }
+  .foot-inner {
+    max-width: var(--max); margin: 0 auto;
+    display: grid; gap: 32px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) { .foot-inner { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
+  footer h4 {
+    color: var(--ivory);
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 14px; }
+  footer a:hover { color: var(--ivory); }
+  .foot-brand .logo { color: var(--ivory); }
+  .foot-brand p { font-size: 13.5px; max-width: 36ch; }
+  .foot-bottom {
+    max-width: var(--max); margin: 36px auto 0;
+    padding-top: 22px;
+    border-top: 1px solid rgba(247,243,238,0.12);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-size: 12px; letter-spacing: 0.04em;
+  }
+
+  /* ——— Reveal motion ——— */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity 600ms ease, transform 600ms ease; }
+    .reveal.in { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <span>Walk-ins welcome · No appointment required for cuts under 30 min</span>
+  <a href="#book" class="hide-sm">Book online →</a>
+</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo" aria-label="Fiorio Vaughan home">
+      FIORIO
+      <small>Vaughan</small>
+    </a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+    </nav>
+    <a href="#book" class="btn small">Book</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="reveal">
+      <span class="eyebrow">Vaughan Mills · Ontario</span>
+      <h1 id="hero-title" class="h-title">
+        A salon, <em>not</em><br/>a chair rental.
+      </h1>
+      <p class="h-lede">Cut, colour, and care from a team trained in the Italian tradition — the way our founders did it in Toronto since 1973.</p>
+      <div class="h-meta">
+        <span><b>Open today</b> · 10:00 – 21:00</span>
+        <span>Inside Vaughan Mills, near Entrance 4</span>
+      </div>
+      <div class="h-cta">
+        <a href="#book" class="btn">Book an appointment</a>
+        <a href="tel:+19057613100" class="btn ghost">Call (905) 761-3100</a>
+      </div>
+    </div>
+    <div class="hero-image" role="img" aria-label="Soft natural light falling on a styled blowout in a Fiorio chair"></div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="about-grid">
+      <div class="about-image" role="img" aria-label="Detail of hands cutting hair"></div>
+      <div>
+        <span class="eyebrow">Our story</span>
+        <h2 class="section-title" style="margin-top:18px">Fifty years of the <em>same hands</em>, a generation of new ones.</h2>
+        <p style="margin-top:24px">Fiorio began on Avenue Road in 1973 — three brothers, three chairs, and a stubborn belief that a haircut should look better the morning after. Vaughan opened in 2009 to bring that same standard north of the city, with a space made for families, professionals, and anyone who values a stylist who actually listens.</p>
+        <p>Every senior stylist completes our in-house apprenticeship. We use Davines and Kérastase. We do not upsell. We do not rush colour. And we'll tell you honestly if a request won't suit your hair.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" aria-labelledby="services-title">
+    <div class="section-head">
+      <h2 id="services-title" class="section-title">Services <em>&amp; pricing</em></h2>
+      <p class="section-lede">Prices start from. Final quote depends on hair length, density, and time at the chair. Consultation is always complimentary.</p>
+    </div>
+    <div class="services-list">
+
+      <article class="service">
+        <h3 class="service-name">Cut &amp; finish</h3>
+        <p class="service-desc">Consultation, shampoo, precision cut, and a blowout you can recreate at home.</p>
+        <div class="service-price">from <b>$68</b></div>
+      </article>
+
+      <article class="service">
+        <h3 class="service-name">Single-process colour</h3>
+        <p class="service-desc">All-over root or refresh in your tone of choice. Includes gloss and finish.</p>
+        <div class="service-price">from <b>$120</b></div>
+      </article>
+
+      <article class="service">
+        <h3 class="service-name">Highlights / Balayage</h3>
+        <p class="service-desc">Hand-painted dimension. Custom mapped to your face and how you wear your hair.</p>
+        <div class="service-price">from <b>$210</b></div>
+      </article>
+
+      <article class="service">
+        <h3 class="service-name">Brazilian smoothing</h3>
+        <p class="service-desc">Frizz reduction that lasts up to four months. Formaldehyde-free formula.</p>
+        <div class="service-price">from <b>$320</b></div>
+      </article>
+
+      <article class="service">
+        <h3 class="service-name">Bridal &amp; events</h3>
+        <p class="service-desc">In-salon or on location. Trial included. Book at least 6 weeks ahead.</p>
+        <div class="service-price">from <b>$140</b></div>
+      </article>
+
+      <article class="service">
+        <h3 class="service-name">Children (under 12)</h3>
+        <p class="service-desc">Patient stylists, low chairs, no judgement on the wiggling.</p>
+        <div class="service-price">from <b>$32</b></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="team" class="team" aria-labelledby="team-title">
+    <div class="section-head">
+      <h2 id="team-title" class="section-title">The <em>team</em></h2>
+      <p class="section-lede">Five senior stylists, two colourists, one apprentice. Ask at booking and we'll match you to the right chair.</p>
+    </div>
+    <div class="team-grid">
+      <article class="stylist">
+        <div class="stylist-photo" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80');"></div>
+        <span class="role">Master stylist</span>
+        <h3>Elena R.</h3>
+        <p>Curls, layered cuts, postpartum hair. 14 years on the floor.</p>
+      </article>
+      <article class="stylist">
+        <div class="stylist-photo" style="background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80');"></div>
+        <span class="role">Senior colourist</span>
+        <h3>Marco D.</h3>
+        <p>Lived-in blondes, balayage corrections, copper formulations.</p>
+      </article>
+      <article class="stylist">
+        <div class="stylist-photo" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80');"></div>
+        <span class="role">Stylist</span>
+        <h3>Priya S.</h3>
+        <p>Short hair, fringe, men's scissor cuts. Speaks Hindi and Punjabi.</p>
+      </article>
+      <article class="stylist">
+        <div class="stylist-photo" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80');"></div>
+        <span class="role">Stylist</span>
+        <h3>Daniel K.</h3>
+        <p>Textured cuts, fades, beard work. Walk-in friendly.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="visit" aria-labelledby="visit-title">
+    <div class="section-head">
+      <h2 id="visit-title" class="section-title">Visit <em>us</em></h2>
+      <p class="section-lede">Free parking on every side of Vaughan Mills. We're a two-minute walk from Entrance 4, between Sephora and the food court.</p>
+    </div>
+    <div class="visit-grid">
+      <div class="map" aria-hidden="true">
+        <span class="label">Fiorio Vaughan</span>
+        <span class="pin"></span>
+      </div>
+      <div class="info-card" id="book">
+        <h3>Plan your visit</h3>
+        <dl class="info-row">
+          <dt>Address</dt>
+          <dd>1 Bass Pro Mills Drive, Unit 217<br/>Vaughan, ON L4K 5W4</dd>
+        </dl>
+        <dl class="info-row">
+          <dt>Phone</dt>
+          <dd><a href="tel:+19057613100" style="border-bottom:1px solid var(--line)">(905) 761-3100</a></dd>
+        </dl>
+        <dl class="info-row">
+          <dt>Hours</dt>
+          <dd>
+            <div class="hours">
+              <div><span>Mon – Fri</span><span>10:00 – 21:00</span></div>
+              <div><span>Saturday</span><span>09:30 – 21:00</span></div>
+              <div><span>Sunday</span><span>11:00 – 19:00</span></div>
+            </div>
+          </dd>
+        </dl>
+        <div class="actions">
+          <a href="#" class="btn">Book online</a>
+          <a href="https://maps.google.com/?q=Vaughan+Mills" class="btn ghost">Get directions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner" aria-labelledby="cta-title">
+    <h2 id="cta-title">A haircut should look <em>better</em> the morning after.</h2>
+    <p>Same-week openings most weeks. Walk-ins welcome for cuts under 30 minutes.</p>
+    <a href="#book" class="btn">Book at Vaughan</a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <div class="logo">FIORIO <small>Vaughan</small></div>
+      <p style="margin-top:14px">Independent salon group. Toronto · Vaughan · Mississauga · Yorkville. Operating since 1973.</p>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <ul>
+        <li>Vaughan Mills</li>
+        <li>Yorkville</li>
+        <li>Square One</li>
+        <li>Avenue Road</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Salon</h4>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#book">Book online</a></li>
+        <li><a href="#">Gift cards</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Newsletter</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="tel:+19057613100">(905) 761-3100</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Fiorio Salons. Visual concept reinterpretation.</span>
+    <span>Made with care · Vaughan, ON</span>
+  </div>
+</footer>
+
+<script>
+  // Lightweight scroll reveal for the hero copy.
+  const els = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && els.length) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    }, { threshold: 0.15 });
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add("in"));
+  }
+</script>
+
+</body>
+</html>
