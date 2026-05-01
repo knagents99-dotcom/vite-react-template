@@ -1,0 +1,1224 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#FAF7F2" />
+<title>Salon Luma — Hair, colour & care</title>
+<meta name="description" content="Salon Luma. Master cuts, lived-in colour, hand-painted highlights. Book a chair." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF7F2;
+    --bg-2: #F1EADD;
+    --line: #E5DCC9;
+    --ink: #15171C;
+    --ink-2: #3B3A3A;
+    --muted: #6F695E;
+    --gold: #B6904A;
+    --gold-soft: #DDC79A;
+    --blush: #C9A9A6;
+    --surface: #FFFFFF;
+    --shadow: 0 1px 0 rgba(21,23,28,0.04), 0 8px 28px -12px rgba(21,23,28,0.10);
+    --radius: 4px;
+    --radius-lg: 10px;
+    --max: 1240px;
+    --pad: clamp(20px, 5vw, 64px);
+    --serif: "Fraunces", "Times New Roman", serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --t-fast: 180ms cubic-bezier(.2,.7,.3,1);
+    --t-med: 320ms cubic-bezier(.2,.7,.3,1);
+  }
+  [data-theme="dark"] {
+    --bg: #0E0F12;
+    --bg-2: #16181D;
+    --line: #2A2D34;
+    --ink: #F4EFE6;
+    --ink-2: #C9C2B5;
+    --muted: #8C8678;
+    --gold: #D5B273;
+    --gold-soft: #6B5731;
+    --blush: #C9A9A6;
+    --surface: #16181D;
+    --shadow: 0 1px 0 rgba(0,0,0,0.5), 0 8px 28px -12px rgba(0,0,0,0.6);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    transition: background var(--t-med), color var(--t-med);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; }
+  ::selection { background: var(--gold-soft); color: var(--ink); }
+
+  /* —— Marquee bar —— */
+  .bar {
+    background: var(--ink); color: var(--bg);
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 10px var(--pad);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .bar a { border-bottom: 1px solid color-mix(in oklab, var(--bg) 35%, transparent); padding-bottom: 1px; }
+  .hide-sm { display: none; }
+  @media (min-width: 720px) { .hide-sm { display: inline; } }
+
+  /* —— Nav —— */
+  .nav {
+    position: sticky; top: 0; z-index: 60;
+    background: color-mix(in oklab, var(--bg) 90%, transparent);
+    backdrop-filter: saturate(140%) blur(12px);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: var(--max); margin: 0 auto;
+    padding: 14px var(--pad);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .logo {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 24px;
+    letter-spacing: 0.16em;
+  }
+  .logo .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--gold) 30%, transparent);
+  }
+  .nav ul { display: none; list-style: none; gap: 28px; margin: 0; padding: 0; }
+  .nav ul a {
+    font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-2); padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: color var(--t-fast), border-color var(--t-fast);
+  }
+  .nav ul a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  @media (min-width: 940px) { .nav ul { display: flex; } }
+  .nav-actions { display: flex; align-items: center; gap: 8px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px 20px;
+    border: 1px solid var(--ink);
+    background: var(--ink); color: var(--bg);
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500;
+    border-radius: var(--radius);
+    transition: background var(--t-fast), color var(--t-fast), transform var(--t-fast), border-color var(--t-fast);
+  }
+  .btn:hover { background: transparent; color: var(--ink); }
+  .btn.ghost { background: transparent; color: var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: var(--bg); }
+  .btn.gold { border-color: var(--gold); background: var(--gold); color: var(--surface); }
+  .btn.gold:hover { background: transparent; color: var(--gold); }
+  .btn.small { padding: 9px 14px; font-size: 11px; }
+  .btn.icon { padding: 9px; aspect-ratio: 1; min-width: 38px; }
+
+  /* —— Hero —— */
+  .hero {
+    max-width: var(--max); margin: 0 auto;
+    padding: clamp(36px, 7vw, 96px) var(--pad) clamp(56px, 8vw, 112px);
+    display: grid; gap: clamp(24px, 4vw, 56px);
+    grid-template-columns: 1fr;
+    position: relative;
+  }
+  @media (min-width: 980px) {
+    .hero { grid-template-columns: 1.1fr 1fr; align-items: end; }
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--gold);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--gold); }
+  .h-title {
+    font-family: var(--serif); font-weight: 500;
+    font-size: clamp(54px, 10vw, 132px);
+    line-height: 0.92;
+    letter-spacing: -0.015em;
+    margin: 18px 0 0;
+  }
+  .h-title em {
+    font-style: italic; font-weight: 400; color: var(--gold);
+    font-variation-settings: "opsz" 144;
+  }
+  .h-lede {
+    margin-top: 24px;
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(20px, 2.4vw, 26px);
+    line-height: 1.4;
+    color: var(--ink-2);
+    max-width: 32ch;
+  }
+  .h-meta {
+    margin-top: 28px;
+    display: flex; flex-wrap: wrap; gap: 12px 24px;
+    font-size: 13px; color: var(--muted);
+  }
+  .h-meta b { color: var(--ink); font-weight: 500; }
+  .h-meta .live {
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .h-meta .live .pulse {
+    width: 8px; height: 8px; border-radius: 50%; background: #2EA56B;
+    box-shadow: 0 0 0 0 rgba(46,165,107,0.6);
+    animation: pulse 1.6s infinite;
+  }
+  @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(46,165,107,0.5);} 70%{box-shadow:0 0 0 10px rgba(46,165,107,0);} 100%{box-shadow:0 0 0 0 rgba(46,165,107,0);} }
+
+  .h-cta { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero-image {
+    aspect-ratio: 4/5;
+    background:
+      linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.4) 100%),
+      url("https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=80") center/cover no-repeat,
+      var(--bg-2);
+    border-radius: var(--radius-lg);
+    position: relative; overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .hero-image .stamp {
+    position: absolute; left: 18px; bottom: 16px;
+    color: #fff;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    background: rgba(21,23,28,0.55); padding: 8px 12px; border-radius: var(--radius);
+    backdrop-filter: blur(6px);
+  }
+  .hero-image .badge {
+    position: absolute; right: 16px; top: 16px;
+    background: var(--surface); color: var(--ink);
+    padding: 10px 14px; border-radius: 999px;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    box-shadow: var(--shadow);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .badge .star { color: var(--gold); }
+
+  /* —— Section —— */
+  section { padding: clamp(64px, 8vw, 120px) var(--pad); }
+  .section-head {
+    max-width: var(--max); margin: 0 auto clamp(28px, 4vw, 56px);
+    display: grid; gap: 16px;
+  }
+  @media (min-width: 880px) {
+    .section-head { grid-template-columns: 1fr 1.4fr; align-items: end; gap: 48px; }
+  }
+  .section-title {
+    font-family: var(--serif); font-weight: 500;
+    font-size: clamp(34px, 5vw, 60px);
+    line-height: 1.04; letter-spacing: -0.01em; margin: 0;
+  }
+  .section-title em { font-style: italic; color: var(--gold); font-weight: 400; }
+  .section-lede { color: var(--ink-2); font-size: 17px; max-width: 56ch; margin: 0; }
+
+  /* —— Trust / press strip —— */
+  .press {
+    max-width: var(--max); margin: 0 auto;
+    padding: 28px var(--pad);
+    display: grid; gap: 20px 40px;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+  }
+  @media (min-width: 720px) { .press { grid-template-columns: repeat(5, 1fr); } }
+  .press span { text-align: center; opacity: 0.7; }
+
+  /* —— Services —— */
+  .services-list {
+    max-width: var(--max); margin: 0 auto;
+    border-top: 1px solid var(--line);
+  }
+  .service {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px 24px;
+    align-items: baseline;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    transition: padding-left var(--t-med);
+  }
+  .service:hover { padding-left: 12px; }
+  @media (min-width: 720px) {
+    .service { grid-template-columns: 1.4fr 2fr auto; }
+  }
+  .service-name {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.4vw, 28px);
+    font-weight: 500; line-height: 1.15;
+    margin: 0;
+  }
+  .service-desc { color: var(--muted); font-size: 14.5px; grid-column: 1 / -1; margin: 0; }
+  @media (min-width: 720px) { .service-desc { grid-column: auto; max-width: 56ch; } }
+  .service-price { font-feature-settings: "tnum" 1; font-size: 15px; white-space: nowrap; }
+  .service-price small { color: var(--muted); font-weight: 400; }
+
+  /* —— Quote estimator —— */
+  .estimator {
+    max-width: var(--max); margin: 0 auto;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: clamp(24px, 4vw, 40px);
+    display: grid; gap: 24px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 880px) { .estimator { grid-template-columns: 1.1fr 1fr; align-items: center; gap: 40px; } }
+  .estimator h3 {
+    font-family: var(--serif); font-weight: 500;
+    font-size: clamp(28px, 3.4vw, 40px); line-height: 1.05; margin: 0 0 8px;
+  }
+  .estimator p { color: var(--ink-2); margin: 0; }
+  .est-form { display: grid; gap: 14px; }
+  .field { display: grid; gap: 8px; }
+  .field label { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .seg {
+    display: grid; grid-auto-flow: column; grid-auto-columns: 1fr;
+    border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; background: var(--surface);
+  }
+  .seg button {
+    background: transparent; border: 0; padding: 12px 8px;
+    font-size: 13px; color: var(--ink-2);
+    border-right: 1px solid var(--line);
+    transition: background var(--t-fast), color var(--t-fast);
+  }
+  .seg button:last-child { border-right: 0; }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  .est-out {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    margin-top: 4px;
+  }
+  .est-out .label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .est-out .price { font-family: var(--serif); font-size: 32px; font-weight: 500; }
+  .est-out .price small { font-size: 14px; color: var(--muted); font-weight: 400; }
+
+  /* —— Team —— */
+  .team-grid {
+    max-width: var(--max); margin: 0 auto;
+    display: grid; gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .stylist { display: grid; gap: 10px; }
+  .stylist-photo {
+    aspect-ratio: 4/5;
+    background-color: var(--bg-2);
+    background-size: cover; background-position: center;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    transition: transform var(--t-med);
+  }
+  .stylist:hover .stylist-photo { transform: translateY(-4px); }
+  .stylist h3 { font-family: var(--serif); font-weight: 500; font-size: 22px; margin: 6px 0 0; }
+  .stylist .role { color: var(--gold); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .stylist p { color: var(--muted); font-size: 14px; margin: 0; }
+
+  /* —— Gallery —— */
+  .gallery {
+    max-width: var(--max); margin: 0 auto;
+    display: grid; gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 720px) { .gallery { grid-template-columns: repeat(4, 1fr); } }
+  .g-item {
+    aspect-ratio: 3/4;
+    background-color: var(--bg-2);
+    background-size: cover; background-position: center;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform var(--t-med);
+  }
+  .g-item:hover { transform: scale(1.02); }
+  .g-item.tall { grid-row: span 2; aspect-ratio: 3/8; }
+
+  /* —— Testimonials —— */
+  .testimonials {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  [data-theme="dark"] .testimonials { background: var(--bg-2); }
+  .testimonials .section-title { color: var(--bg); }
+  [data-theme="dark"] .testimonials .section-title { color: var(--ink); }
+  .testimonials .section-lede { color: color-mix(in oklab, var(--bg) 70%, transparent); }
+  [data-theme="dark"] .testimonials .section-lede { color: var(--ink-2); }
+  .reviews {
+    max-width: var(--max); margin: 0 auto;
+    display: grid; gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .review {
+    background: color-mix(in oklab, var(--bg) 6%, transparent);
+    border: 1px solid color-mix(in oklab, var(--bg) 12%, transparent);
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    display: grid; gap: 14px;
+  }
+  [data-theme="dark"] .review { background: var(--surface); border-color: var(--line); color: var(--ink); }
+  .review .stars { color: var(--gold); letter-spacing: 2px; font-size: 13px; }
+  .review blockquote {
+    font-family: var(--serif); font-style: italic;
+    font-size: 18px; line-height: 1.5;
+    margin: 0;
+    color: var(--bg);
+  }
+  [data-theme="dark"] .review blockquote { color: var(--ink); }
+  .review cite {
+    color: color-mix(in oklab, var(--bg) 60%, transparent);
+    font-style: normal;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+  [data-theme="dark"] .review cite { color: var(--muted); }
+
+  /* —— Booking —— */
+  .booking {
+    max-width: var(--max); margin: 0 auto;
+    display: grid; gap: clamp(24px, 4vw, 40px);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 880px) { .booking { grid-template-columns: 1fr 1.1fr; } }
+  .booking-card, .booking-image {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+  .booking-image {
+    aspect-ratio: 5/6;
+    background:
+      linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.45) 100%),
+      url("https://images.unsplash.com/photo-1620331311520-246422fd82f9?auto=format&fit=crop&w=1000&q=80") center/cover no-repeat;
+    display: flex; align-items: flex-end; padding: 24px; color: #fff;
+    border: 0;
+  }
+  .booking-image em {
+    font-family: var(--serif);
+    font-size: 22px; line-height: 1.3;
+    font-style: italic;
+    max-width: 24ch;
+  }
+  .booking-card { padding: clamp(24px, 4vw, 36px); display: grid; gap: 22px; }
+  .booking-card h3 { font-family: var(--serif); font-weight: 500; font-size: 28px; margin: 0; }
+  .slots {
+    display: grid; gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .slot {
+    border: 1px solid var(--line);
+    background: var(--bg);
+    padding: 12px 8px;
+    font-size: 13px;
+    border-radius: var(--radius);
+    text-align: center;
+    transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+  }
+  .slot[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .slot:disabled { opacity: 0.4; cursor: not-allowed; text-decoration: line-through; }
+
+  /* —— Newsletter —— */
+  .newsletter {
+    background: var(--bg-2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .nl-inner {
+    max-width: 720px; margin: 0 auto; text-align: center;
+  }
+  .nl-inner h2 {
+    font-family: var(--serif);
+    font-size: clamp(34px, 5vw, 56px);
+    line-height: 1.05;
+    margin: 0 auto 14px;
+    max-width: 18ch;
+  }
+  .nl-inner p { color: var(--ink-2); margin: 0 auto 24px; max-width: 48ch; }
+  .nl-form {
+    display: grid; gap: 8px;
+    grid-template-columns: 1fr;
+    max-width: 480px; margin: 0 auto;
+  }
+  @media (min-width: 600px) { .nl-form { grid-template-columns: 1fr auto; } }
+  .nl-form input {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-family: inherit;
+    transition: border-color var(--t-fast);
+  }
+  .nl-form input:focus { outline: 2px solid var(--gold); outline-offset: 2px; border-color: var(--gold); }
+  .nl-msg { font-size: 13px; color: var(--muted); margin-top: 10px; min-height: 1.4em; }
+  .nl-msg.ok { color: #2EA56B; }
+  .nl-msg.err { color: #C7464F; }
+
+  /* —— Visit —— */
+  .visit-grid {
+    max-width: var(--max); margin: 0 auto;
+    display: grid; gap: clamp(24px, 4vw, 48px);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 880px) { .visit-grid { grid-template-columns: 1.1fr 1fr; } }
+  .map {
+    aspect-ratio: 4/3;
+    background:
+      radial-gradient(circle at 60% 40%, color-mix(in oklab, var(--gold) 14%, transparent), transparent 60%),
+      repeating-linear-gradient(45deg, var(--bg-2) 0 12px, var(--bg) 12px 24px);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    position: relative; overflow: hidden;
+  }
+  .map::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: linear-gradient(transparent 49%, var(--line) 50%, transparent 51%),
+                      linear-gradient(90deg, transparent 49%, var(--line) 50%, transparent 51%);
+    background-size: 64px 64px; opacity: 0.5;
+  }
+  .map .pin {
+    position: absolute; left: 50%; top: 50%;
+    width: 14px; height: 14px;
+    background: var(--gold);
+    border: 3px solid var(--bg);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--gold) 25%, transparent), 0 4px 12px rgba(0,0,0,0.18);
+  }
+  .map .label {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, calc(-50% - 32px));
+    background: var(--ink); color: var(--bg);
+    padding: 6px 10px;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    border-radius: var(--radius);
+    white-space: nowrap;
+  }
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: clamp(24px, 4vw, 36px);
+    display: grid; gap: 20px;
+  }
+  .info-card h3 { font-family: var(--serif); font-weight: 500; font-size: 28px; margin: 0; }
+  .info-row { display: grid; grid-template-columns: 110px 1fr; gap: 16px; align-items: start; font-size: 14.5px; margin: 0; }
+  .info-row dt { color: var(--muted); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; padding-top: 3px; }
+  .info-row dd { margin: 0; color: var(--ink); }
+  .hours { display: grid; gap: 4px; font-variant-numeric: tabular-nums; }
+  .hours div { display: grid; grid-template-columns: 110px 1fr; }
+  .hours span:last-child { color: var(--ink-2); }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  /* —— Footer —— */
+  footer {
+    background: var(--ink);
+    color: color-mix(in oklab, var(--bg) 70%, transparent);
+    padding: 56px var(--pad) calc(96px + env(safe-area-inset-bottom));
+  }
+  @media (min-width: 720px) { footer { padding-bottom: 48px; } }
+  .foot-inner {
+    max-width: var(--max); margin: 0 auto;
+    display: grid; gap: 32px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) { .foot-inner { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
+  footer h4 { color: var(--bg); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; margin: 0 0 14px; }
+  footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 14px; }
+  footer a:hover { color: var(--bg); }
+  .foot-brand .logo { color: var(--bg); }
+  .foot-bottom {
+    max-width: var(--max); margin: 36px auto 0;
+    padding-top: 22px;
+    border-top: 1px solid color-mix(in oklab, var(--bg) 14%, transparent);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-size: 12px; letter-spacing: 0.04em;
+  }
+
+  /* —— Mobile bottom bar —— */
+  .mob-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    background: color-mix(in oklab, var(--surface) 90%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .mob-bar a {
+    text-align: center; padding: 12px 4px;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-2);
+    border-right: 1px solid var(--line);
+  }
+  .mob-bar a:last-child { border-right: 0; color: var(--gold); font-weight: 500; }
+  @media (min-width: 720px) { .mob-bar { display: none; } }
+
+  /* —— Chat widget —— */
+  .chat-fab {
+    position: fixed; right: 18px; bottom: calc(72px + env(safe-area-inset-bottom)); z-index: 70;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--gold); color: #fff; border: 0;
+    box-shadow: 0 12px 32px -10px rgba(21,23,28,0.45), 0 0 0 6px color-mix(in oklab, var(--gold) 25%, transparent);
+    display: grid; place-items: center;
+    transition: transform var(--t-fast);
+  }
+  @media (min-width: 720px) { .chat-fab { bottom: 24px; right: 24px; } }
+  .chat-fab:hover { transform: scale(1.06); }
+  .chat-fab svg { width: 26px; height: 26px; }
+  .chat-fab .dot {
+    position: absolute; top: 6px; right: 6px;
+    width: 10px; height: 10px; background: #2EA56B;
+    border-radius: 50%; border: 2px solid var(--surface);
+  }
+  .chat-panel {
+    position: fixed; right: 16px; bottom: calc(140px + env(safe-area-inset-bottom)); z-index: 80;
+    width: min(360px, calc(100vw - 32px));
+    max-height: 70vh;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 24px 60px -20px rgba(21,23,28,0.5);
+    display: none;
+    grid-template-rows: auto 1fr auto;
+    overflow: hidden;
+  }
+  @media (min-width: 720px) { .chat-panel { bottom: 92px; right: 24px; } }
+  .chat-panel.open { display: grid; animation: slidein .25s ease; }
+  @keyframes slidein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .chat-head {
+    background: var(--ink); color: var(--bg);
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .chat-head .avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--gold); color: #fff;
+    display: grid; place-items: center;
+    font-family: var(--serif); font-weight: 500;
+  }
+  .chat-head .who { display: grid; gap: 2px; }
+  .chat-head .who b { font-weight: 500; font-size: 14px; letter-spacing: 0.04em; }
+  .chat-head .who small { font-size: 11px; opacity: 0.7; display: inline-flex; align-items: center; gap: 6px; }
+  .chat-head .who small::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #2EA56B; }
+  .chat-close {
+    margin-left: auto; background: transparent; border: 0; color: var(--bg); opacity: 0.7;
+    font-size: 22px; line-height: 1; padding: 4px;
+  }
+  .chat-body {
+    padding: 16px; display: grid; gap: 10px; overflow-y: auto;
+    background: var(--bg);
+    align-content: start;
+  }
+  .msg {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 14px; line-height: 1.45;
+    animation: pop .18s ease;
+  }
+  @keyframes pop { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  .msg.bot { background: var(--surface); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+  .msg.user { background: var(--ink); color: var(--bg); justify-self: end; border-bottom-right-radius: 4px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 12px; }
+  .chip {
+    background: var(--surface); border: 1px solid var(--line);
+    padding: 7px 11px; border-radius: 999px;
+    font-size: 12px; color: var(--ink-2);
+  }
+  .chip:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .chat-input {
+    display: grid; grid-template-columns: 1fr auto; gap: 8px;
+    padding: 12px; border-top: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .chat-input input {
+    border: 1px solid var(--line); background: var(--bg);
+    padding: 10px 12px; border-radius: 999px;
+    font-size: 14px; color: var(--ink); font-family: inherit;
+  }
+  .chat-input input:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: var(--gold); }
+  .chat-send {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--gold); color: #fff; border: 0;
+    display: grid; place-items: center;
+  }
+  .chat-send svg { width: 16px; height: 16px; }
+  .typing { color: var(--muted); font-size: 12px; padding: 4px 16px; }
+  .typing span { display: inline-block; width: 4px; height: 4px; background: var(--muted); border-radius: 50%; margin-right: 3px; animation: bounce 1.2s infinite; }
+  .typing span:nth-child(2) { animation-delay: 0.15s; }
+  .typing span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes bounce { 0%,80%,100% { transform: translateY(0); opacity: 0.4; } 40% { transform: translateY(-4px); opacity: 1; } }
+
+  /* —— Reveal —— */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity 600ms ease, transform 600ms ease; }
+    .reveal.in { opacity: 1; transform: none; }
+  }
+
+  /* —— Toast —— */
+  .toast {
+    position: fixed; left: 50%; bottom: calc(160px + env(safe-area-inset-bottom)); z-index: 90;
+    transform: translate(-50%, 20px);
+    background: var(--ink); color: var(--bg);
+    padding: 12px 18px; border-radius: 999px;
+    font-size: 13px; letter-spacing: 0.06em;
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+    box-shadow: 0 12px 32px -10px rgba(0,0,0,0.4);
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <span>Now booking through July · New stylist intro pricing</span>
+  <a href="#book" class="hide-sm">Reserve a chair →</a>
+</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo" aria-label="Salon Luma home">
+      <span class="dot" aria-hidden="true"></span>
+      LUMA
+    </a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#estimator">Quote</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="btn ghost icon" id="themeToggle" aria-label="Toggle theme" title="Toggle light/dark">
+        <svg id="themeIcon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <a href="#book" class="btn small">Book</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="reveal">
+      <span class="eyebrow">Studio · By appointment &amp; walk-in</span>
+      <h1 id="hero-title" class="h-title">Hair, with the<br/><em>lights</em> on.</h1>
+      <p class="h-lede">A small studio of senior stylists. Master cuts, lived-in colour, and hand-painted highlights that grow out kindly.</p>
+      <div class="h-meta">
+        <span class="live"><span class="pulse" aria-hidden="true"></span><b>Open now</b> · until 21:00</span>
+        <span><b>4.9</b> · 612 reviews</span>
+      </div>
+      <div class="h-cta">
+        <a href="#book" class="btn">Book a chair</a>
+        <a href="#estimator" class="btn ghost">Get a quote</a>
+      </div>
+    </div>
+    <div class="hero-image" role="img" aria-label="Soft natural light over a fresh blowout">
+      <span class="badge"><span class="star">★</span> 4.9 on Google</span>
+      <span class="stamp">Studio · 1408 W. Mercer Ave</span>
+    </div>
+  </section>
+
+  <div class="press" aria-label="Featured in">
+    <span>Vogue</span><span>Allure</span><span>Refinery29</span><span>The Cut</span><span>Cond&eacute; Nast</span>
+  </div>
+
+  <section id="services" aria-labelledby="services-title">
+    <div class="section-head">
+      <h2 id="services-title" class="section-title">Services <em>&amp; pricing</em></h2>
+      <p class="section-lede">All prices start from. Final quote depends on length, density, and chair time. Consultation is always free.</p>
+    </div>
+    <div class="services-list">
+      <article class="service">
+        <h3 class="service-name">Signature cut</h3>
+        <p class="service-desc">Consultation, shampoo, precision cut, and a finish you can repeat at home.</p>
+        <div class="service-price">from <b>$72</b></div>
+      </article>
+      <article class="service">
+        <h3 class="service-name">Single-process colour</h3>
+        <p class="service-desc">Root touch-up or all-over refresh. Includes gloss and finish.</p>
+        <div class="service-price">from <b>$135</b></div>
+      </article>
+      <article class="service">
+        <h3 class="service-name">Lived-in highlights</h3>
+        <p class="service-desc">Hand-painted balayage, mapped to face shape and how you actually wear your hair.</p>
+        <div class="service-price">from <b>$240</b></div>
+      </article>
+      <article class="service">
+        <h3 class="service-name">Bond-builder treatment</h3>
+        <p class="service-desc">Olaplex or K18 protocol. Repairs and primes hair before colour or as standalone.</p>
+        <div class="service-price">from <b>$58</b></div>
+      </article>
+      <article class="service">
+        <h3 class="service-name">Bridal &amp; events</h3>
+        <p class="service-desc">In-studio or on location. Trial included. Book at least 6 weeks ahead.</p>
+        <div class="service-price">from <b>$165</b></div>
+      </article>
+      <article class="service">
+        <h3 class="service-name">Children (under 12)</h3>
+        <p class="service-desc">Patient stylists, low chairs, no judgement on the wiggling.</p>
+        <div class="service-price">from <b>$36</b></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="estimator" aria-labelledby="est-title">
+    <div class="section-head">
+      <h2 id="est-title" class="section-title">Quote <em>in 30 seconds</em></h2>
+      <p class="section-lede">A starting estimate based on what you're after. Not a contract — your stylist confirms at the chair.</p>
+    </div>
+    <div class="estimator">
+      <div>
+        <h3>What are we doing today?</h3>
+        <p>Pick a service and length. We'll show a starting estimate and your senior-stylist range.</p>
+      </div>
+      <form class="est-form" id="estForm" onsubmit="return false;">
+        <div class="field">
+          <label for="est-service">Service</label>
+          <div class="seg" id="est-service" role="group" aria-label="Service">
+            <button type="button" data-service="cut" aria-pressed="true">Cut</button>
+            <button type="button" data-service="single">Colour</button>
+            <button type="button" data-service="highlights">Highlights</button>
+            <button type="button" data-service="treatment">Treatment</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="est-length">Length</label>
+          <div class="seg" id="est-length" role="group" aria-label="Length">
+            <button type="button" data-length="short" aria-pressed="true">Short</button>
+            <button type="button" data-length="medium">Medium</button>
+            <button type="button" data-length="long">Long</button>
+            <button type="button" data-length="xlong">Extra long</button>
+          </div>
+        </div>
+        <div class="est-out">
+          <div>
+            <div class="label">Estimated</div>
+            <div class="price"><span id="estLow">$72</span><small> – <span id="estHigh">$110</span></small></div>
+          </div>
+          <a href="#book" class="btn small">Book this</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="team" aria-labelledby="team-title">
+    <div class="section-head">
+      <h2 id="team-title" class="section-title">The <em>team</em></h2>
+      <p class="section-lede">Five senior stylists, two colourists, one apprentice. Tell us at booking and we'll match you to the right chair.</p>
+    </div>
+    <div class="team-grid">
+      <article class="stylist">
+        <div class="stylist-photo" style="background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80');"></div>
+        <span class="role">Master stylist</span>
+        <h3>Mira O.</h3>
+        <p>Curls, layered cuts, postpartum hair.</p>
+      </article>
+      <article class="stylist">
+        <div class="stylist-photo" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80');"></div>
+        <span class="role">Senior colourist</span>
+        <h3>Marco D.</h3>
+        <p>Lived-in blondes, copper formulations.</p>
+      </article>
+      <article class="stylist">
+        <div class="stylist-photo" style="background-image:url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80');"></div>
+        <span class="role">Stylist</span>
+        <h3>Priya S.</h3>
+        <p>Short hair, fringe, men's scissor cuts.</p>
+      </article>
+      <article class="stylist">
+        <div class="stylist-photo" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80');"></div>
+        <span class="role">Stylist</span>
+        <h3>Daniel K.</h3>
+        <p>Textured cuts, fades, beard work.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="gallery" aria-labelledby="gallery-title">
+    <div class="section-head">
+      <h2 id="gallery-title" class="section-title"><em>Recent</em> work</h2>
+      <p class="section-lede">Real clients, real lighting. Tap any image to see the story behind it on Instagram.</p>
+    </div>
+    <div class="gallery">
+      <a class="g-item tall" href="#" style="background-image:url('https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=800&q=80');" aria-label="Lived-in copper balayage"></a>
+      <a class="g-item" href="#" style="background-image:url('https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=600&q=80');" aria-label="Curtain bangs reset"></a>
+      <a class="g-item" href="#" style="background-image:url('https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?auto=format&fit=crop&w=600&q=80');" aria-label="Long layers"></a>
+      <a class="g-item" href="#" style="background-image:url('https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=600&q=80');" aria-label="Smooth blowout"></a>
+      <a class="g-item" href="#" style="background-image:url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=600&q=80');" aria-label="Colour correction"></a>
+      <a class="g-item" href="#" style="background-image:url('https://images.unsplash.com/photo-1618333258404-f509733839c4?auto=format&fit=crop&w=600&q=80');" aria-label="Textured bob"></a>
+      <a class="g-item" href="#" style="background-image:url('https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=600&q=80');" aria-label="Bridal updo"></a>
+    </div>
+  </section>
+
+  <section class="testimonials" aria-labelledby="rev-title">
+    <div class="section-head">
+      <h2 id="rev-title" class="section-title">Why people <em>come back</em></h2>
+      <p class="section-lede">Verified Google &amp; Yelp reviews from the last 90 days.</p>
+    </div>
+    <div class="reviews">
+      <article class="review">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Mira is the first stylist who has ever cut my curls without thinning them into oblivion. She listened, took her time, and the shape grew out beautifully."</blockquote>
+        <cite>— Jordan A. · Google</cite>
+      </article>
+      <article class="review">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Came in with a botched box-dye situation. Marco was patient, honest about what would take more than one visit, and the colour now looks like I was born with it."</blockquote>
+        <cite>— Hema P. · Yelp</cite>
+      </article>
+      <article class="review">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Quiet studio, beautiful space, and they actually finish on time. The free consultation before booking made me feel like a person, not a transaction."</blockquote>
+        <cite>— Sasha R. · Google</cite>
+      </article>
+    </div>
+  </section>
+
+  <section id="book" aria-labelledby="book-title">
+    <div class="section-head">
+      <h2 id="book-title" class="section-title">Reserve a <em>chair</em></h2>
+      <p class="section-lede">Pick a slot for tomorrow. For other dates, we'll send you to the full booking calendar.</p>
+    </div>
+    <div class="booking">
+      <div class="booking-image" role="img" aria-label="Stylist at the chair">
+        <em>"A haircut should look better the morning after — that's the whole job."</em>
+      </div>
+      <form class="booking-card" id="bookForm" onsubmit="return false;">
+        <h3>Tomorrow's openings</h3>
+        <div class="slots" id="slots">
+          <button type="button" class="slot">09:30</button>
+          <button type="button" class="slot" disabled>10:15</button>
+          <button type="button" class="slot">11:00</button>
+          <button type="button" class="slot">12:30</button>
+          <button type="button" class="slot" disabled>14:00</button>
+          <button type="button" class="slot">15:15</button>
+          <button type="button" class="slot">16:45</button>
+          <button type="button" class="slot">18:00</button>
+          <button type="button" class="slot" disabled>19:30</button>
+        </div>
+        <p style="color:var(--muted); font-size:13px; margin:0;">Selected: <b id="selSlot" style="color:var(--ink)">none</b></p>
+        <div class="actions">
+          <button class="btn gold" id="confirmSlot" type="button">Confirm slot</button>
+          <a class="btn ghost" href="#">See full calendar</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div class="nl-inner">
+      <span class="eyebrow">Studio letter</span>
+      <h2 style="margin-top:14px">One short letter, every other Sunday.</h2>
+      <p>Cancellation openings, new-stylist pricing, and the occasional how-to. No spam. Unsubscribe in one click.</p>
+      <form class="nl-form" id="nlForm" novalidate>
+        <input type="email" id="nlEmail" placeholder="you@example.com" aria-label="Email address" required>
+        <button class="btn" type="submit">Subscribe</button>
+      </form>
+      <p class="nl-msg" id="nlMsg" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section id="visit" aria-labelledby="visit-title">
+    <div class="section-head">
+      <h2 id="visit-title" class="section-title">Visit <em>us</em></h2>
+      <p class="section-lede">Street parking on Mercer. Two blocks from the W-line tram. Step-free entrance from the side door.</p>
+    </div>
+    <div class="visit-grid">
+      <div class="map" aria-hidden="true">
+        <span class="label">Salon Luma</span>
+        <span class="pin"></span>
+      </div>
+      <div class="info-card">
+        <h3>Plan your visit</h3>
+        <dl class="info-row"><dt>Address</dt><dd>1408 W. Mercer Avenue<br/>Suite 2A · Studio entrance</dd></dl>
+        <dl class="info-row"><dt>Phone</dt><dd><a href="tel:+15555550199" style="border-bottom:1px solid var(--line)">(555) 555-0199</a></dd></dl>
+        <dl class="info-row"><dt>Hours</dt><dd>
+          <div class="hours">
+            <div><span>Tue – Fri</span><span>10:00 – 21:00</span></div>
+            <div><span>Saturday</span><span>09:30 – 19:00</span></div>
+            <div><span>Sunday</span><span>11:00 – 17:00</span></div>
+            <div><span>Monday</span><span>Closed</span></div>
+          </div>
+        </dd></dl>
+        <div class="actions">
+          <a href="#book" class="btn gold">Book online</a>
+          <a href="https://maps.google.com/?q=1408+W+Mercer" class="btn ghost">Get directions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <div class="logo"><span class="dot" aria-hidden="true"></span> LUMA</div>
+      <p style="margin-top:14px; font-size:13.5px; max-width:36ch;">A small independent studio. Master cuts, considered colour, no rush. Open since 2018.</p>
+    </div>
+    <div>
+      <h4>Salon</h4>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#book">Book</a></li>
+        <li><a href="#">Gift cards</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Studio</h4>
+      <ul>
+        <li><a href="#visit">Visit</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Newsletter</a></li>
+        <li><a href="tel:+15555550199">(555) 555-0199</a></li>
+        <li><a href="mailto:hello@salonluma.example">hello@salonluma.example</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Salon Luma. Visual concept reinterpretation.</span>
+    <span>Made with care</span>
+  </div>
+</footer>
+
+<nav class="mob-bar" aria-label="Quick">
+  <a href="tel:+15555550199">Call</a>
+  <a href="#visit">Directions</a>
+  <a href="#book">Book →</a>
+</nav>
+
+<button class="chat-fab" id="chatFab" aria-label="Open chat" aria-expanded="false" aria-controls="chatPanel">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  <span class="dot" aria-hidden="true"></span>
+</button>
+
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Salon Luma assistant">
+  <div class="chat-head">
+    <div class="avatar">L</div>
+    <div class="who"><b>Luma assistant</b><small>Replies in seconds</small></div>
+    <button class="chat-close" id="chatClose" aria-label="Close chat">×</button>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="msg bot">Hi — I'm Luma's studio assistant. I can help with hours, location, services, pricing, or booking. What can I help with?</div>
+  </div>
+  <div class="chips" id="chatChips">
+    <button class="chip" data-q="What are your hours?">Hours</button>
+    <button class="chip" data-q="Where are you located?">Location</button>
+    <button class="chip" data-q="How much is a haircut?">Pricing</button>
+    <button class="chip" data-q="How do I book?">Book</button>
+    <button class="chip" data-q="Do you do balayage?">Balayage</button>
+  </div>
+  <form class="chat-input" id="chatForm">
+    <input id="chatText" type="text" autocomplete="off" placeholder="Type a question..." aria-label="Type a message">
+    <button class="chat-send" type="submit" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </form>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  // ——— Theme toggle ———
+  const root = document.documentElement;
+  const tBtn = document.getElementById("themeToggle");
+  const stored = localStorage.getItem("luma-theme");
+  if (stored === "dark" || (!stored && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches)) {
+    root.setAttribute("data-theme", "dark");
+  }
+  tBtn.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem("luma-theme", next);
+  });
+
+  // ——— Reveal ———
+  const els = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    }, { threshold: 0.15 });
+    els.forEach((el) => io.observe(el));
+  } else { els.forEach((el) => el.classList.add("in")); }
+
+  // ——— Toast ———
+  const toast = document.getElementById("toast");
+  let toastTimer;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 2400);
+  }
+
+  // ——— Quote estimator ———
+  const PRICES = {
+    cut:        { short: [72, 110],  medium: [85, 130],  long: [98, 150],  xlong: [115, 175] },
+    single:     { short: [135, 180], medium: [155, 210], long: [180, 245], xlong: [210, 290] },
+    highlights: { short: [240, 320], medium: [280, 380], long: [320, 440], xlong: [380, 520] },
+    treatment:  { short: [58, 90],   medium: [68, 105],  long: [78, 125],  xlong: [92, 145]  },
+  };
+  let estService = "cut", estLength = "short";
+  function setSeg(scope, attr, val) {
+    scope.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b.dataset[attr] === val ? "true" : "false"));
+  }
+  function recalcEst() {
+    const [lo, hi] = PRICES[estService][estLength];
+    document.getElementById("estLow").textContent = "$" + lo;
+    document.getElementById("estHigh").textContent = "$" + hi;
+  }
+  document.getElementById("est-service").addEventListener("click", (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    estService = b.dataset.service; setSeg(e.currentTarget, "service", estService); recalcEst();
+  });
+  document.getElementById("est-length").addEventListener("click", (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    estLength = b.dataset.length; setSeg(e.currentTarget, "length", estLength); recalcEst();
+  });
+
+  // ——— Booking slots ———
+  let selected = null;
+  document.getElementById("slots").addEventListener("click", (e) => {
+    const b = e.target.closest(".slot"); if (!b || b.disabled) return;
+    document.querySelectorAll(".slot").forEach((s) => s.setAttribute("aria-pressed", "false"));
+    b.setAttribute("aria-pressed", "true");
+    selected = b.textContent.trim();
+    document.getElementById("selSlot").textContent = selected;
+  });
+  document.getElementById("confirmSlot").addEventListener("click", () => {
+    if (!selected) { showToast("Pick a time first"); return; }
+    showToast("Held " + selected + " — check email for confirmation");
+  });
+
+  // ——— Newsletter ———
+  document.getElementById("nlForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("nlEmail").value.trim();
+    const msg = document.getElementById("nlMsg");
+    msg.classList.remove("ok", "err");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      msg.textContent = "Please enter a valid email."; msg.classList.add("err"); return;
+    }
+    msg.textContent = "Thanks — confirmation sent to " + email + ".";
+    msg.classList.add("ok");
+    document.getElementById("nlEmail").value = "";
+  });
+
+  // ——— Chat widget ———
+  const fab = document.getElementById("chatFab");
+  const panel = document.getElementById("chatPanel");
+  const closeBtn = document.getElementById("chatClose");
+  const body = document.getElementById("chatBody");
+  const form = document.getElementById("chatForm");
+  const input = document.getElementById("chatText");
+  const chips = document.getElementById("chatChips");
+
+  function openChat(open) {
+    panel.classList.toggle("open", open);
+    fab.setAttribute("aria-expanded", open ? "true" : "false");
+    if (open) setTimeout(() => input.focus(), 200);
+  }
+  fab.addEventListener("click", () => openChat(!panel.classList.contains("open")));
+  closeBtn.addEventListener("click", () => openChat(false));
+
+  function addMsg(text, who) {
+    const div = document.createElement("div");
+    div.className = "msg " + who;
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+    return div;
+  }
+  function typing() {
+    const t = document.createElement("div");
+    t.className = "typing";
+    t.innerHTML = "<span></span><span></span><span></span>";
+    body.appendChild(t); body.scrollTop = body.scrollHeight;
+    return t;
+  }
+
+  function reply(q) {
+    const s = q.toLowerCase();
+    if (/(hi|hello|hey|hola)\b/.test(s)) return "Hi! I can help with hours, location, services, pricing, or booking. What's on your mind?";
+    if (/(hour|open|close|time)/.test(s)) return "We're open Tue–Fri 10:00–21:00, Saturday 09:30–19:00, Sunday 11:00–17:00. Closed Mondays.";
+    if (/(address|where|located|location|map|direct)/.test(s)) return "We're at <b>1408 W. Mercer Ave, Suite 2A</b>. Two blocks from the W-line tram. Want a <a href='https://maps.google.com/?q=1408+W+Mercer'>map link</a>?";
+    if (/(park)/.test(s)) return "Free 2-hour street parking on Mercer. The lot behind the building is also $4 flat after 5pm.";
+    if (/(phone|call|number)/.test(s)) return "You can reach us at <a href='tel:+15555550199'>(555) 555-0199</a> — we usually pick up unless we're at the chair.";
+    if (/(book|appointment|reserve|schedule|slot)/.test(s)) return "Pick a time in the <a href='#book'>Reserve a chair</a> section above, or I can hold tomorrow's 11:00 if that works?";
+    if (/(cancel|reschedul)/.test(s)) return "No fee if you reschedule with 24h notice. Use the link in your confirmation email, or call us.";
+    if (/(price|cost|how much|fee|rate)/.test(s)) return "Cuts from <b>$72</b>, single-process colour from <b>$135</b>, lived-in highlights from <b>$240</b>. Try the <a href='#estimator'>quote tool</a> for a tighter range.";
+    if (/(highlight|balayage|baby light|babylight)/.test(s)) return "Yes — hand-painted balayage and babylights are Marco's specialty. Starts around <b>$240</b>; budget 3–4 hours for the first visit.";
+    if (/(curl|coily|texture)/.test(s)) return "Mira specialises in curls — dry-cuts, no thinning shears unless you ask, products that don't make it crunchy. Ask for her at booking.";
+    if (/(child|kid|son|daughter)/.test(s)) return "Children under 12 are <b>$36</b>. We have low chairs and patient stylists. Saturdays book up fast.";
+    if (/(consult|first time)/.test(s)) return "Consultations are free and take about 15 min — book it like a regular slot. We'll match you with the right stylist.";
+    if (/(gift|card|certificate)/.test(s)) return "Yes — gift cards are available in any amount. We can email a digital one or mail a physical card.";
+    if (/(walk\s?-?in)/.test(s)) return "We take walk-ins for cuts under 30 minutes when there's an opening. Best chance is Tue/Wed before 5pm.";
+    if (/(human|agent|real person|stylist)/.test(s)) return "Want me to text the studio? Drop your number and what you're after — they'll reply within working hours.";
+    if (/thank/.test(s)) return "Anytime. Anything else I can help with?";
+    return "I can help with <b>hours</b>, <b>location</b>, <b>pricing</b>, or <b>booking</b>. Or call <a href='tel:+15555550199'>(555) 555-0199</a> and a real human will pick up.";
+  }
+
+  function send(q) {
+    addMsg(q, "user");
+    const t = typing();
+    setTimeout(() => {
+      t.remove();
+      addMsg(reply(q), "bot");
+    }, 480 + Math.random() * 320);
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const v = input.value.trim();
+    if (!v) return;
+    input.value = "";
+    send(v);
+  });
+  chips.addEventListener("click", (e) => {
+    const c = e.target.closest(".chip"); if (!c) return;
+    send(c.dataset.q);
+  });
+
+  // open chat once after 8s if user hasn't dismissed
+  setTimeout(() => {
+    if (!sessionStorage.getItem("luma-chat-seen") && !panel.classList.contains("open")) {
+      openChat(true);
+      sessionStorage.setItem("luma-chat-seen", "1");
+    }
+  }, 8000);
+})();
+</script>
+
+</body>
+</html>
